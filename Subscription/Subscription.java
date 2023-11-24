@@ -1,24 +1,19 @@
 import java.time.LocalDate;
 
 public class Subscription {
-    private User user;
-    private Plan plan ;
+    private Plan plan = new Plan();
     private  int PriceOfPlan ; // basics = 10     standard = 20    premium = 40
 
-    int numberOfMovies;
-    int days ;
+    int numberOfMovies;//hn5odha man al plan class
+    int days ;// hi3od i2l l7d wi hn3mlo m3a al GUI
     LocalDate StartDate;
 
     static int countBasic=0;
     static int countStandard=0;
     static int countPremium=0;
 
-    public void setPriceOfPlan(int priceOfPlan)
-    {
-        PriceOfPlan = priceOfPlan;
-    }
 
-    public void checkSubcriptionValidity(int user.ID)
+    public void checkSubcriptionValidity()
     {
         if(PriceOfPlan ==  10)
         {
@@ -47,8 +42,13 @@ public class Subscription {
             days = 0;
         }
     }
+    public void setPriceOfPlan(int priceOfPlan)
+    {
+        PriceOfPlan = priceOfPlan;
+        checkSubcriptionValidity();
+    }
 
-    public void SubcriptionEnding(int user.ID)
+    public void SubcriptionEnding()
     {
         if( numberOfMovies==0 || days ==0)
         {
@@ -64,10 +64,11 @@ public class Subscription {
             System.out.println("Be Alerted : You only have 2 movies left wi bsl ");
         }
     }
-    public void SatuesSubscription(int user.ID)
+    public void StatusSubscription()
     {
-        System.out.println("Subscription: "+ plan.getPlan()+"\t"+"Number Of Movies left: "+numberOfMovies +"Days left: "+days);
+        System.out.println("Subscription: "+ plan.getPlan()+"     Number Of Movies left: "+numberOfMovies +"     Days left: "+days);
     }
+
 
 
     //Revenue from Subscription
