@@ -4,13 +4,19 @@ public class Subscription {
     private User user;
     private Plan plan ;
     private  int PriceOfPlan ; // basics = 10     standard = 20    premium = 40
+
     int numberOfMovies;
     int days ;
-    LocalDate date;
-    public void setPriceOfPlan(int priceOfPlan) {
+    LocalDate StartDate;
+
+    static int countBasic=0;
+    static int countStandard=0;
+    static int countPremium=0;
+
+    public void setPriceOfPlan(int priceOfPlan)
+    {
         PriceOfPlan = priceOfPlan;
     }
-
 
     public void checkSubcriptionValidity(int user.ID)
     {
@@ -18,19 +24,22 @@ public class Subscription {
         {
             plan.setPlan("Basic");
             days = 30;
-            date = LocalDate.now();
+            StartDate = LocalDate.now();
+            countBasic++;
         }
         else if(PriceOfPlan ==  20)
         {
             plan.setPlan("Standard");
             days = 30;
-            date = LocalDate.now();
+            StartDate = LocalDate.now();
+            countStandard++;
         }
         else if(PriceOfPlan ==  40)
         {
             plan.setPlan("Premium");
             days = 30;
-            date = LocalDate.now();
+            StartDate = LocalDate.now();
+            countPremium++;
         }
         else
         {
@@ -55,9 +64,33 @@ public class Subscription {
             System.out.println("Be Alerted : You only have 2 movies left wi bsl ");
         }
     }
-    public void SatuesSubscription()
+    public void SatuesSubscription(int user.ID)
     {
         System.out.println("Subscription: "+ plan.getPlan()+"\t"+"Number Of Movies left: "+numberOfMovies +"Days left: "+days);
     }
-    
+
+
+    //Revenue from Subscription
+
+    public static int RevenueBasic ()
+    {
+        //27sb li kol shr
+
+        return countBasic*10;
+    }
+    public static int RevenueStandard ()
+    {
+        //27sb li kol shr
+        return countStandard*20;
+    }
+    public static int RevenuePremium ()
+    {
+        //27sb li kol shr
+        return countPremium*40;
+    }
+    public static int TotalRevenue ()
+    {
+        return RevenueBasic() + RevenueStandard() + RevenuePremium();
+    }
+
 }
