@@ -2,7 +2,7 @@ import java.time.LocalDate;
 
 public class Subscription {
     private Plan plan = new Plan();
-    private  int PriceOfPlan ; // basics = 10     standard = 20    premium = 40
+    int PriceOfPlan ; // basics = 10     standard = 20    premium = 40
 
     int numberOfMovies;//hn5odha man al plan class
     int days ;// hi3od i2l l7d wi hn3mlo m3a al GUI
@@ -52,7 +52,7 @@ public class Subscription {
     {
         if( numberOfMovies==0 || days ==0)
         {
-            plan.setPlan("Unkown");//change it to NULL
+           setPriceOfPlan(0);
             System.out.println("Your current Subcription has ended");
         }
     }
