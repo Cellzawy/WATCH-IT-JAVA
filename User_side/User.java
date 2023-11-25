@@ -124,7 +124,7 @@ public class User {
         }
     }
 
-    public void Setuser_Rating(Movie movie,int rating) { //the movie must be on the watched list first
+    public void SetUserRating(Movie movie,int rating) { //the movie must be on the watched list first
         boolean isReallyWatched = false;
         if (rating <= 10 && rating >= 0) {
             for (int i = 0; i < Watched.size(); i++) { //cheking if the movie with its name is on the watched list
@@ -135,11 +135,11 @@ public class User {
             }
         }
 
-
         if (isReallyWatched) {
             for (int i = 0; i < Watched.size(); i++) {
                 if (movie.getMovieTitle().equals(Watched.get(i).getMovieTitle())) {
                     Watched.get(i).user_Rating = rating;
+                    Watched.get(i).Ratings.add((float)rating);
                 }
             }
 
