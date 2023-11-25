@@ -4,6 +4,7 @@ public class Movie {
 
     //////////////////////////////////////////////////Fields////////////////////////////////////////////////////////////
 
+    ArrayList<Float> Ratings = new ArrayList<Float>();
     private boolean Is_Watched = false; // status
 
     private final int movieID; // can be seen by Director
@@ -89,10 +90,6 @@ public class Movie {
         System.arraycopy(languages, 0, Languages, 0, languages.length);
     }
 
-    public void setImdb_score(float imdb_score) {
-        this.imdb_score = imdb_score;
-    }
-
     public void setCountry(String country) {
         this.country = country;
     }
@@ -129,7 +126,10 @@ public class Movie {
     }
 
     public double getImdb_score() {
-        return imdb_score;
+        for(int i = 0 ; i < Ratings.size() ; i++) {
+            imdb_score+= Ratings.get(i);
+        }
+        return imdb_score/Ratings.size();
     }
 
     public String getCountry() {
