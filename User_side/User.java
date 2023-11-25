@@ -1,4 +1,6 @@
-import java.util.UUID;
+import java.lang.reflect.Array;
+import java.util.*;
+
 
 public class User {
     //fields
@@ -109,42 +111,46 @@ public class User {
     }
 
     public void deleteMovieFromWatched(String movieName) {
-        //compare the size with the number of elements if not equal grows the array size
-        boolean found = false;
-        Movie temp3 = Watched[sizeOfWatched - 1];
-        for (int i = 0; i < watchedCount; i++) {
-            if (Watched[i].getMovieTitle().equals(movieName.toLowerCase())) {
-                found = true;
-                Watched[sizeOfWatched - 1] = Watched[i];
-                Watched[i] = temp3;
+        if(watchedCount > 0) {
+            boolean found = false;
+            int index = -1;
+            for (int i = 0; i < watchedCount; i++) {
+                if (Watched[i].getMovieTitle().equals(movieName.toLowerCase())) {
+                    found = true;
+                    index = i;
+                }
             }
-        }
-        if(found) {
-            changeSizeOfWatched(false);
-            watchedCount--;
+            for (int i = index; i < sizeOfWatched - 1; i++) {
+                //shifting all the elements to the left from the specified index
+                Watched[i] = Watched[i + 1];
+            }
+            if (found) {
+                changeSizeOfWatched(false);
+                watchedCount--;
+            }
         }
     }
 
     public void changeSizeOfLater(boolean condition) {
         //declares a temp[] array
-        Movie temp2[] = null;
+        Movie temp[] = null;
         if (laterCount == sizeOfLater) {
             //initialize a double size array of array
             if (condition) {
-                temp2 = new Movie[sizeOfLater + 1];
+                temp = new Movie[sizeOfLater + 1];
                 for (int i = 0; i < sizeOfLater; i++) {
                     //copies all the elements of the old array
-                    temp2[i] = Later[i];
+                    temp[i] = Later[i];
                 }
             } else if (!condition) {
-                temp2 = new Movie[sizeOfLater - 1];
+                temp = new Movie[sizeOfLater - 1];
                 for (int i = 0; i < Later.length - 1; i++) {
                     //copies all the elements of the old array
-                    temp2[i] = Later[i];
+                    temp[i] = Later[i];
                 }
             }
         }
-        Later = temp2;
+        Later = temp;
         if (condition) {
             sizeOfLater += 1;
         } else {
@@ -153,7 +159,6 @@ public class User {
     }
 
     public void addMovieToLater(Movie movie) {
-        //compares if the number of elements is equal to the size of the array or not
         if(movie.getMovieTitle() != null) {
             boolean found = false;
             for (int i = 0; i < laterCount; i++) {
@@ -171,19 +176,23 @@ public class User {
     }
 
     public void deleteMovieFromlater(String movieName) {
-        //compare the size with the number of elements if not equal grows the array size
-        boolean found = false;
-        Movie temp2 = Later[sizeOfLater - 1];
-        for (int i = 0; i < laterCount; i++) {
-            if (Later[i].getMovieTitle().equals(movieName.toLowerCase())) {
-                found = true;
-                Later[sizeOfLater - 1] = Later[i];
-                Later[i] = temp2;
+        if(laterCount > 0) {
+            boolean found = false;
+            int index = -1;
+            for (int i = 0; i < laterCount; i++) {
+                if (Later[i].getMovieTitle().equals(movieName.toLowerCase())) {
+                    found = true;
+                    index = i;
+                }
             }
-        }
-        if(found) {
-            changeSizeOfLater(false);
-            laterCount--;
+            for (int i = index; i < sizeOfLater - 1; i++) {
+                //shifting all the elements to the left from the specified index
+                Later[i] = Later[i + 1];
+            }
+            if (found) {
+                changeSizeOfWatched(false);
+                laterCount--;
+            }
         }
     }
     public void check_movie(Movie movie)//to be sure there is not any duplicate in the watched list
