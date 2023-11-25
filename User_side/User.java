@@ -5,12 +5,8 @@ import java.util.*;
 public class User {
     //fields
 
-    private int watchedCount = 0; // how many watched movies
-    private int sizeOfWatched = 0; // size of watched[]
-
-    private int laterCount = 0; // how many watched movies
-    private int sizeOfLater = 0; // size of Movie[]
-
+    ArrayList<Movie> Watched = new ArrayList<Movie>();
+    ArrayList<Movie> Later = new ArrayList<Movie>();
     private final String User_ID;
     private String first_name;
     private String last_name;
@@ -18,17 +14,6 @@ public class User {
     private String user_password;
 
     public Subscription sub = new Subscription();
-//    private Movie movie = new Movie();
-
-    Movie[] Later = new Movie[1];
-    Movie[] Watched = new Movie[1];
-    //    int number_of_movie_to_watch_later = 1;
-//    private String[] watch_later_list = new String[number_of_movie_to_watch_later];
-//    // 7ateto size-1 3ashan 2a5li el added movieTitle fi el 2a5er wi 2ashil e7timal eno lao da5al
-//    // el max number of movie eli hoa number_of_movie_to_watch_later wi hoa bie3mel el account
-//
-//    int number_of_movie_watched = 1;
-//    private String[] watched_list = new String[number_of_movie_to_watch_later];
     private String theme_preference;
 
 
@@ -43,166 +28,8 @@ public class User {
         return User_ID;
     }
 
-//    public void AddToWatch_later_list(Movie movie) {
-//        for (int i = 0; i < number_of_movie_to_watch_later-1; i++) { //if the added movie is already in the watch later
-//            if (watch_later_list[i].equals(movie.getMovieTitle())) {          // break from the function
-//                return;
-//            }
-//        }
-//        watch_later_list[number_of_movie_to_watch_later-1] = movie.getMovieTitle();
-//        number_of_movie_to_watch_later++;
-//
-//    }
-//
-//    public void AddToWatched_list(Movie movie) {
-//        for (int i = 0; i < number_of_movie_watched-1; i++) { //if the added movie is already in the watched
-//            if (watched_list[i].equals(movie.getMovieTitle())) {// break from the function
-//                return;
-//            }
-//        }
-//        watch_later_list[number_of_movie_watched-1] = movie.getMovieTitle();
-//        number_of_movie_watched++;
-//
-//    }
 
-    public void changeSizeOfWatched(boolean condition) {
-        //declares a temp[] array
-        Movie temp[] = null;
-        if (watchedCount == sizeOfWatched) {
-            //initialize a double size array of array
-            if (condition) {
-                temp = new Movie[sizeOfWatched + 1];
-                for (int i = 0; i < sizeOfWatched; i++) {
-                    //copies all the elements of the old array
-                    temp[i] = Watched[i];
-                }
-            } else if (!condition) {
-                temp = new Movie[Watched.length - 1];
-                for (int i = 0; i < Watched.length - 1; i++) {
-                    //copies all the elements of the old array
-                    temp[i] = Watched[i];
-                }
-            }
-        }
-        Watched = temp;
-        if (condition) {
-            sizeOfWatched += 1;
-        } else {
-            sizeOfWatched -= 1;
-        }
-    }
 
-    public void addMovieToWatched(Movie movie) {
-        //compares if the number of elements is equal to the size of the array or not
-        if(!movie.getIs_Watched()) {
-            movie.setIs_Watched(true);
-            deleteMovieFromlater(movie.getMovieTitle().toLowerCase());
-        }
-        if(movie.getMovieTitle() != null) {
-            boolean found = false;
-            for (int i = 0; i < watchedCount; i++) {
-                if (Watched[i].getMovieTitle().equals(movie.getMovieTitle().toLowerCase())) {
-                    found = true;
-                }
-            }
-            //invoking the growSize() method that creates an array of 2X the size
-            if (!found) {
-                changeSizeOfWatched(true);
-                Watched[watchedCount] = movie;
-                watchedCount++;
-            }
-        }
-    }
-
-    public void deleteMovieFromWatched(String movieName) {
-        if(watchedCount > 0) {
-            boolean found = false;
-            int index = -1;
-            for (int i = 0; i < watchedCount; i++) {
-                if (Watched[i].getMovieTitle().equals(movieName.toLowerCase())) {
-                    found = true;
-                    index = i;
-                }
-            }
-            for (int i = index; i < sizeOfWatched - 1; i++) {
-                //shifting all the elements to the left from the specified index
-                Watched[i] = Watched[i + 1];
-            }
-            if (found) {
-                changeSizeOfWatched(false);
-                watchedCount--;
-            }
-        }
-    }
-
-    public void changeSizeOfLater(boolean condition) {
-        //declares a temp[] array
-        Movie temp[] = null;
-        if (laterCount == sizeOfLater) {
-            //initialize a double size array of array
-            if (condition) {
-                temp = new Movie[sizeOfLater + 1];
-                for (int i = 0; i < sizeOfLater; i++) {
-                    //copies all the elements of the old array
-                    temp[i] = Later[i];
-                }
-            } else if (!condition) {
-                temp = new Movie[sizeOfLater - 1];
-                for (int i = 0; i < Later.length - 1; i++) {
-                    //copies all the elements of the old array
-                    temp[i] = Later[i];
-                }
-            }
-        }
-        Later = temp;
-        if (condition) {
-            sizeOfLater += 1;
-        } else {
-            sizeOfLater -= 1;
-        }
-    }
-
-    public void addMovieToLater(Movie movie) {
-        if(movie.getIs_Watched()) {
-            movie.setIs_Watched(false);
-            deleteMovieFromWatched(movie.getMovieTitle().toLowerCase());
-        }
-        if(movie.getMovieTitle() != null) {
-            boolean found = false;
-            for (int i = 0; i < laterCount; i++) {
-                if (Later[i].getMovieTitle().equals(movie.getMovieTitle().toLowerCase())) {
-                    found = true;
-                }
-            }
-            //invoking the growSize() method that creates an array of 2X the size
-            if (!found) {
-                changeSizeOfLater(true);
-                Later[laterCount] = movie;
-                laterCount++;
-            }
-        }
-    }
-
-    public void deleteMovieFromlater(String movieName) {
-        if(laterCount > 0) {
-            boolean found = false;
-            int index = -1;
-            for (int i = 0; i < laterCount; i++) {
-                if (Later[i].getMovieTitle().equals(movieName.toLowerCase())) {
-                    found = true;
-                    index = i;
-                }
-            }
-            for (int i = index; i < sizeOfLater - 1; i++) {
-                //shifting all the elements to the left from the specified index
-                Later[i] = Later[i + 1];
-            }
-            if (found) {
-                changeSizeOfLater(false);
-                laterCount--;
-            }
-        }
-    }
     public void check_movie(Movie movie)//to be sure there is not any duplicate in the watched list
     // and the watched later list
     {
@@ -266,22 +93,22 @@ public class User {
 
     public void getWatched() {
         System.out.println("Watched Movie List : ");
-        if(watchedCount == 0) {
+        if(Watched.isEmpty()) {
             System.out.println("No Movies Available");
         } else {
-            for (int i = 0; i < Watched.length; i++) {
-                System.out.println(i + 1 + ") " + Watched[i].getMovieTitle());
+            for (int i = 0; i < Watched.size(); i++) {
+                System.out.println(i + 1 + ") " + Watched.get(i).getMovieTitle());
             }
         }
     }
 
     public void getLater() {
         System.out.println("Watch Later Movie List : ");
-        if(laterCount == 0) {
+        if(Later.isEmpty()) {
             System.out.println("No Movies Available");
         } else {
-            for (int i = 0; i < Later.length; i++) {
-                System.out.println(i + 1 + ") " + Later[i].getMovieTitle());
+            for (int i = 0; i < Later.size(); i++) {
+                System.out.println(i + 1 + ") " + Later.get(i).getMovieTitle());
             }
         }
     }
@@ -300,8 +127,8 @@ public class User {
     public void Setuser_Rating(Movie movie,int rating) { //the movie must be on the watched list first
         boolean isReallyWatched = false;
         if (rating <= 10 && rating >= 0) {
-            for (int i = 0; i < Watched.length; i++) { //cheking if the movie with its name is on the watched list
-                if (Watched[i].getMovieTitle().equals(movie.getMovieTitle())) {
+            for (int i = 0; i < Watched.size(); i++) { //cheking if the movie with its name is on the watched list
+                if (Watched.get(i).getMovieTitle().equals(movie.getMovieTitle())) {
                     isReallyWatched = true;
                     break;
                 }
@@ -310,9 +137,9 @@ public class User {
 
 
         if (isReallyWatched) {
-            for (int i = 0; i < Watched.length; i++) {
-                if (movie.getMovieTitle().equals(Watched[i].getMovieTitle())) {
-                    Watched[i].user_Rating = rating;
+            for (int i = 0; i < Watched.size(); i++) {
+                if (movie.getMovieTitle().equals(Watched.get(i).getMovieTitle())) {
+                    Watched.get(i).user_Rating = rating;
                 }
             }
 
@@ -323,16 +150,34 @@ public class User {
 
     public void getUserRatingForMovie() {
         System.out.println("Watched Movie List : ");
-        if(watchedCount == 0) {
+        if(Watched.isEmpty()) {
             System.out.println("No Movies Available");
         } else {
-            for (int i = 0; i < Watched.length; i++) {
-                if(Watched[i].user_Rating == -1) {
-                    System.out.println(i + 1 + ") " + Watched[i].getMovieTitle() + " not rated");
+            for (int i = 0; i < Watched.size(); i++) {
+                if(Watched.get(i).user_Rating == -1) {
+                    System.out.println(i + 1 + ") " + Watched.get(i).getMovieTitle() + " not rated");
                 } else {
-                    System.out.println(i + 1 + ") " + Watched[i].getMovieTitle() + " " + Watched[i].user_Rating);
+                    System.out.println(i + 1 + ") " + Watched.get(i).getMovieTitle() + " " + Watched.get(i).user_Rating);
                 }
             }
         }
+    }
+
+    public void addMovieToWatched(Movie movie) {
+        Later.remove(movie);
+        Watched.add(movie);
+    }
+
+    public void addMovieToLater(Movie movie) {
+        Watched.remove(movie);
+        Later.add(movie);
+    }
+
+    public void removeMovieFromWatched(Movie movie) {
+        Watched.remove(movie);
+    }
+
+    public void removeMovieFromLater(Movie movie) {
+        Later.remove(movie);
     }
 }

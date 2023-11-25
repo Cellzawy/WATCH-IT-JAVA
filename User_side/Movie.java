@@ -1,8 +1,11 @@
 import java.time.LocalDate;
-
+import java.util.*;
 public class Movie {
-    //// Fields
-    private boolean Is_Watched = false;
+
+    //////////////////////////////////////////////////Fields////////////////////////////////////////////////////////////
+
+    private boolean Is_Watched = false; // status
+
     private final int movieID; // can be seen by Director
 
     public String movieTitle;
@@ -11,12 +14,11 @@ public class Movie {
 
     public int RunningTime; // in minutes
 
-    // <--Movie array stuff-->
-    private int movieCount; // how many cast members
-    private int sizeOfMovie; // size of case[]
-
     private String[] Genres;
-    //public Director director = new Director();
+
+    //public Director director = new Director(); // Director object
+
+    //private Cast cast[]; // Defining the array of cast
 
     String[] Languages;
 
@@ -28,13 +30,14 @@ public class Movie {
 
     public double revenue;
 
-    public int user_Rating;
+    public int user_Rating; // user rating for that movie
 
 //    public Image poster = new ImageIcon(this.getClass().getResource("Source of the image"));
 
     public Movie() {
         user_Rating = -1;
         Is_Watched = false;
+//        this.movieID = UUID.randomUUID().toString();
         this.movieID = 0;
         this.movieTitle = null;
         this.releaseDate = null;
@@ -62,6 +65,7 @@ public class Movie {
         this.revenue = revenue;
     }
 
+    ///////////////////////////////////////////////Setters and Getters//////////////////////////////////////////////////
 
     public void setMovieTitle(String movieTitle) {
         this.movieTitle = movieTitle.toLowerCase();
