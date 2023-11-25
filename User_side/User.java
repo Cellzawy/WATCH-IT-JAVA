@@ -3,6 +3,11 @@ import java.util.UUID;
 public class User {
     //fields
 
+    private int watchedCount = 0; // how many watched movies
+    private int sizeOfWatched = 0; // size of watched[]
+
+    private int laterCount = 0; // how many watched movies
+    private int sizeOfLater = 0; // size of Movie[]
 
     private final String User_ID;
     private String first_name;
@@ -11,11 +16,11 @@ public class User {
     private String user_password;
 
     public Subscription sub = new Subscription();
-    private Movie movie = new Movie();
+//    private Movie movie = new Movie();
 
-
-    Movie[] moviesList = new Movie[1];
-//    int number_of_movie_to_watch_later = 1;
+    Movie[] Later = new Movie[1];
+    Movie[] Watched = new Movie[1];
+    //    int number_of_movie_to_watch_later = 1;
 //    private String[] watch_later_list = new String[number_of_movie_to_watch_later];
 //    // 7ateto size-1 3ashan 2a5li el added movieTitle fi el 2a5er wi 2ashil e7timal eno lao da5al
 //    // el max number of movie eli hoa number_of_movie_to_watch_later wi hoa bie3mel el account
@@ -58,77 +63,133 @@ public class User {
 //
 //    }
 
-    private int movieCount = 0; // how many Movies
-    private int sizeOfMovie = 0; // size of Movie[]
-
-    public void changeSize(boolean condition) {
+    public void changeSizeOfWatched(boolean condition) {
         //declares a temp[] array
         Movie temp[] = null;
-        if (movieCount == sizeOfMovie) {
+        if (watchedCount == sizeOfWatched) {
             //initialize a double size array of array
             if (condition) {
-                temp = new Movie[moviesList.length + 1];
-                for (int i = 0; i < sizeOfMovie; i++) {
+                temp = new Movie[sizeOfWatched + 1];
+                for (int i = 0; i < sizeOfWatched; i++) {
                     //copies all the elements of the old array
-                    temp[i] = moviesList[i];
+                    temp[i] = Watched[i];
                 }
             } else if (!condition) {
-                temp = new Movie[moviesList.length - 1];
-                for (int i = 0; i < moviesList.length - 1; i++) {
+                temp = new Movie[Watched.length - 1];
+                for (int i = 0; i < Watched.length - 1; i++) {
                     //copies all the elements of the old array
-                    temp[i] = moviesList[i];
+                    temp[i] = Watched[i];
                 }
             }
         }
-        moviesList = temp;
+        Watched = temp;
         if (condition) {
-            sizeOfMovie += 1;
+            sizeOfWatched += 1;
         } else {
-            sizeOfMovie -= 1;
+            sizeOfWatched -= 1;
         }
     }
 
-    public void addMovie(Movie movie) {
+    public void addMovieToWatched(Movie movie) {
         //compares if the number of elements is equal to the size of the array or not
         if(movie.getMovieTitle() != null) {
             boolean found = false;
-            for (int i = 0; i < movieCount; i++) {
-                if (moviesList[i].getMovieTitle().equals(movie.getMovieTitle().toLowerCase())) {
+            for (int i = 0; i < watchedCount; i++) {
+                if (Watched[i].getMovieTitle().equals(movie.getMovieTitle().toLowerCase())) {
                     found = true;
                 }
             }
             //invoking the growSize() method that creates an array of 2X the size
             if (!found) {
-                changeSize(true);
-                moviesList[movieCount] = movie;
-                movieCount++;
+                changeSizeOfWatched(true);
+                Watched[watchedCount] = movie;
+                watchedCount++;
             }
         }
     }
 
-    public void deleteMovieNamed(String movieName) {
+    public void deleteMovieFromWatched(String movieName) {
         //compare the size with the number of elements if not equal grows the array size
         boolean found = false;
-        Movie temp = moviesList[sizeOfMovie - 1];
-        for (int i = 0; i < movieCount; i++) {
-            if (moviesList[i].getMovieTitle().equals(movieName.toLowerCase())) {
+        Movie temp3 = Watched[sizeOfWatched - 1];
+        for (int i = 0; i < watchedCount; i++) {
+            if (Watched[i].getMovieTitle().equals(movieName.toLowerCase())) {
                 found = true;
-                moviesList[sizeOfMovie - 1] = moviesList[i];
-                moviesList[i] = temp;
+                Watched[sizeOfWatched - 1] = Watched[i];
+                Watched[i] = temp3;
             }
         }
         if(found) {
-            changeSize(false);
-            movieCount--;
+            changeSizeOfWatched(false);
+            watchedCount--;
         }
     }
 
+    public void changeSizeOfLater(boolean condition) {
+        //declares a temp[] array
+        Movie temp2[] = null;
+        if (laterCount == sizeOfLater) {
+            //initialize a double size array of array
+            if (condition) {
+                temp2 = new Movie[sizeOfLater + 1];
+                for (int i = 0; i < sizeOfLater; i++) {
+                    //copies all the elements of the old array
+                    temp2[i] = Later[i];
+                }
+            } else if (!condition) {
+                temp2 = new Movie[sizeOfLater - 1];
+                for (int i = 0; i < Later.length - 1; i++) {
+                    //copies all the elements of the old array
+                    temp2[i] = Later[i];
+                }
+            }
+        }
+        Later = temp2;
+        if (condition) {
+            sizeOfLater += 1;
+        } else {
+            sizeOfLater -= 1;
+        }
+    }
 
+    public void addMovieToLater(Movie movie) {
+        //compares if the number of elements is equal to the size of the array or not
+        if(movie.getMovieTitle() != null) {
+            boolean found = false;
+            for (int i = 0; i < laterCount; i++) {
+                if (Later[i].getMovieTitle().equals(movie.getMovieTitle().toLowerCase())) {
+                    found = true;
+                }
+            }
+            //invoking the growSize() method that creates an array of 2X the size
+            if (!found) {
+                changeSizeOfLater(true);
+                Later[laterCount] = movie;
+                laterCount++;
+            }
+        }
+    }
+
+    public void deleteMovieFromlater(String movieName) {
+        //compare the size with the number of elements if not equal grows the array size
+        boolean found = false;
+        Movie temp2 = Later[sizeOfLater - 1];
+        for (int i = 0; i < laterCount; i++) {
+            if (Later[i].getMovieTitle().equals(movieName.toLowerCase())) {
+                found = true;
+                Later[sizeOfLater - 1] = Later[i];
+                Later[i] = temp2;
+            }
+        }
+        if(found) {
+            changeSizeOfLater(false);
+            laterCount--;
+        }
+    }
     public void check_movie(Movie movie)//to be sure there is not any duplicate in the watched list
-                                        // and the watched later list
+    // and the watched later list
     {
-        if (movie.getisIswatched()) {
-
+        if (movie.getIs_Watched()) {
 
         }
     }
