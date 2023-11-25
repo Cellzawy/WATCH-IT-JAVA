@@ -1,11 +1,8 @@
 import java.time.LocalDate;
 
 public class Subscription {
-    private Plan plan = new Plan();
-    int PriceOfPlan ; // basics = 10     standard = 20    premium = 40
-
-    int numberOfMovies;//hn5odha man al plan class
-    int days ;// hi3od i2l l7d wi hn3mlo m3a al GUI
+    Plan plan = new Plan();
+    int PriceOfPlan ; // basics = 10     standard = 15   premium = 30
     LocalDate StartDate;
 
     static int countBasic=0;
@@ -13,62 +10,61 @@ public class Subscription {
     static int countPremium=0;
 
 
-    public void checkSubcriptionValidity()
+    public void setPriceOfPlan(int priceOfPlan)
     {
-        if(PriceOfPlan ==  10)
+        PriceOfPlan = priceOfPlan;
+        setSubcription();
+    }
+
+    public void setSubcription()
+    {
+        if( PriceOfPlan ==  10)
         {
-            plan.setPlan("Basic");
-            days = 30;
+            plan.setTypeOfPlan("Basic");
             StartDate = LocalDate.now();
             countBasic++;
         }
-        else if(PriceOfPlan ==  20)
+        else if(PriceOfPlan ==  15)
         {
-            plan.setPlan("Standard");
-            days = 30;
+            plan.setTypeOfPlan("Standard");
             StartDate = LocalDate.now();
             countStandard++;
         }
-        else if(PriceOfPlan ==  40)
+        else if(PriceOfPlan ==  30)
         {
-            plan.setPlan("Premium");
-            days = 30;
+            plan.setTypeOfPlan("Premium");
             StartDate = LocalDate.now();
             countPremium++;
         }
         else
         {
-            plan.setPlan("Unknown");
-            days = 0;
+            plan.setTypeOfPlan("Unsubcribed");
+            plan.days = 0;
+            plan.numberOfMovies =0;
         }
     }
-    public void setPriceOfPlan(int priceOfPlan)
-    {
-        PriceOfPlan = priceOfPlan;
-        checkSubcriptionValidity();
-    }
+
 
     public void SubcriptionEnding()
     {
-        if( numberOfMovies==0 || days ==0)
+        if( plan.numberOfMovies==0 || plan.days ==0)
         {
            setPriceOfPlan(0);
-            System.out.println("Your current Subcription has ended");
+           System.out.println("Your current Subcription has ended");
         }
     }
 
     public  void Warring(Plan plan)
     {
-        if(numberOfMovies == 2)
+        if(plan.numberOfMovies == 2)
         {
             System.out.println("Be Alerted : You only have 2 movies left wi bsl ");
         }
     }
     public void StatusSubscription()
     {
-        System.out.println("Subscription: "+ plan.getPlan()+"     Number Of Movies left: "+numberOfMovies +"     Days left: "+days);
+        System.out.println("Subscription: "+ plan.typeOfPlan+"     Number Of Movies left: "+plan.numberOfMovies +"     Days left: "+plan.days);
     }
-
 
 
     //Revenue from Subscription
@@ -82,12 +78,12 @@ public class Subscription {
     public static int RevenueStandard ()
     {
         //27sb li kol shr
-        return countStandard*20;
+        return countStandard*15;
     }
     public static int RevenuePremium ()
     {
         //27sb li kol shr
-        return countPremium*40;
+        return countPremium*30;
     }
     public static int TotalRevenue ()
     {

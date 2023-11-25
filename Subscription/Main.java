@@ -3,11 +3,17 @@
 public class Main {
     public static void main(String[] args) {
 
-        System.out.printf("Hello and welcome!");
+      Subscription x = new Subscription();
+      x.setPriceOfPlan(10);
 
-        for (int i = 1; i <= 5; i++) {
+      x.StatusSubscription();
 
-            System.out.println("i = " + i);
-        }
+        Subscription y = new Subscription();
+        y.setPriceOfPlan(30);
+
+        y.StatusSubscription();
+
+
+
     }
 }
