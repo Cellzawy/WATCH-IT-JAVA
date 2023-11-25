@@ -15,6 +15,8 @@ public class User {
 
 
     Movie[] moviesList = new Movie[1];
+    Movie[] watch_later_list = new Movie[1];
+    Movie[] watched_list = new Movie[1];
 //    int number_of_movie_to_watch_later = 1;
 //    private String[] watch_later_list = new String[number_of_movie_to_watch_later];
 //    // 7ateto size-1 3ashan 2a5li el added movieTitle fi el 2a5er wi 2ashil e7timal eno lao da5al
@@ -57,6 +59,7 @@ public class User {
 //        number_of_movie_watched++;
 //
 //    }
+
 
     private int movieCount = 0; // how many Movies
     private int sizeOfMovie = 0; // size of Movie[]
@@ -221,6 +224,29 @@ public class User {
             this.theme_preference = theme_preference;
         }
     }
+
+//    public void Setuser_Rating(Movie movie,int rating){ //the movie must be on the watched list first
+//        boolean isReallyWatched=false;
+//        for (int i = 0; i < watched_list.length; i++) { //cheking if the movie with its name is on the watched list
+//            if (watched_list[i].equals(movie.movieTitle)){
+//                isReallyWatched=true;
+//                break;
+//            }
+//        }
+//
+//
+//        if(isReallyWatched) {
+//            movie.user_Rating=rating;
+//
+//        }
+//        else{
+//            System.out.println("Movie wasn't watched");
+//
+//        }
+//
+//
+//    }
+
 
 
 }

@@ -1,11 +1,14 @@
 public class Movie {
     private boolean iswatched;
 
+    public int user_Rating;
+
     private String movieTitle;
 
     public String getMovieTitle() {
         return movieTitle;
     }
+
 
     public void setMovieTitle(String movieTitle) {
         this.movieTitle = movieTitle;
