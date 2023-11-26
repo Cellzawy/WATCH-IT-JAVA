@@ -4,7 +4,7 @@ import java.util.*;
 
 public class User {
     //fields
-
+    static ArrayList<Movie> MovieList = new ArrayList<Movie>();
     ArrayList<Movie> Watched = new ArrayList<Movie>();
     ArrayList<Movie> Later = new ArrayList<Movie>();
     private final String User_ID;
@@ -30,13 +30,13 @@ public class User {
 
 
 
-    public void check_movie(Movie movie)//to be sure there is not any duplicate in the watched list
-    // and the watched later list
-    {
-        if (movie.getIs_Watched()) {
-
-        }
-    }
+//    public void check_movie(Movie movie)//to be sure there is not any duplicate in the watched list
+//    // and the watched later list
+//    {
+//        if (movie.getIs_Watched()) {
+//
+//        }
+//    }
 
     public void Cancel_Subscription()
     {
@@ -173,6 +173,15 @@ public class User {
         Later.add(movie);
     }
 
+    public void addMovieToMovieList(Movie movie) {
+        MovieList.add(movie);
+    }
+
+    public void removeMovieFromMovieList(Movie movie) {
+        MovieList.remove(movie);
+    }
+
+
     public void removeMovieFromWatched(Movie movie) {
         Watched.remove(movie);
     }
@@ -180,4 +189,53 @@ public class User {
     public void removeMovieFromLater(Movie movie) {
         Later.remove(movie);
     }
+
+    ////////////////////////////needed to be tested////////////////////////////////////////
+    public static void GetTopRatedMovie(){
+        ArrayList <Movie> sortedMoviesRating  = new ArrayList<Movie>();
+        for (int i = 0; i < MovieList.size(); i++) {
+            sortedMoviesRating.add(MovieList.get(i));
+        }
+
+        Collections.sort(sortedMoviesRating, new Comparator<Movie>() {
+            @Override
+            public int compare(Movie o1, Movie o2) {
+                if (o1.imdb_score<o2.imdb_score) {
+                    return -1;
+                }
+                else if (o1.imdb_score>o2.imdb_score) {
+                    return 1;
+
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+        });
+    }//needed to be tested
+
+    public static void SearchMovieByName(String name_of_Movie){
+
+//        boolean it_exist_on_Movielist=false;
+        for (int i = 0; i <MovieList.size(); i++) {
+            if (MovieList.get(i).getMovieTitle().toLowerCase().equals(name_of_Movie.toLowerCase())){
+//                it_exist_on_Movielist=true;
+//                break;
+                System.out.println(i + 1 + ") " + MovieList.get(i).getMovieTitle());
+
+            }
+
+        }
+
+//        if (it_exist_on_Movielist)
+//        {
+//            for (int i = 0; i < MovieList.size(); i++) {
+//                System.out.println(i + 1 + ") " + MovieList.get(i).getMovieTitle());
+//            }
+//        }
+//
+    }//must be discussed with ali
+
+
 }
