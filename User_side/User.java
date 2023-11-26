@@ -4,7 +4,7 @@ import java.util.*;
 
 public class User {
     //fields
-    static ArrayList<Movie> MovieList = new ArrayList<Movie>();
+    private static ArrayList<Movie> MovieList = new ArrayList<Movie>();
     ArrayList<Movie> Watched = new ArrayList<Movie>();
     ArrayList<Movie> Later = new ArrayList<Movie>();
     private final String User_ID;
@@ -164,21 +164,58 @@ public class User {
     }
 
     public void addMovieToWatched(Movie movie) {
-        Later.remove(movie);
-        Watched.add(movie);
+       boolean Is_Added_Before_InWatched = false;
+        for (int i = 0; i < Watched.size(); i++) {
+            if (Watched.get(i).getMovieTitle().toLowerCase().equals(movie.getMovieTitle().toLowerCase())){
+                Is_Added_Before_InWatched = true;
+            }
+        }
+        if (!Is_Added_Before_InWatched){
+            Later.remove(movie);
+            Watched.add(movie);
+        }
+
     }
 
     public void addMovieToLater(Movie movie) {
-        Watched.remove(movie);
-        Later.add(movie);
+        boolean Is_Added_Before_InLater = false;
+        for (int i = 0; i < Later.size(); i++) {
+            if (Later.get(i).getMovieTitle().toLowerCase().equals(movie.getMovieTitle().toLowerCase())){
+                Is_Added_Before_InLater = true;
+            }
+        }
+        if (!Is_Added_Before_InLater){
+            Watched.remove(movie);
+            Later.add(movie);
+        }
     }
 
-    public void addMovieToMovieList(Movie movie) {
-        MovieList.add(movie);
+    public static void addMovieToMovieList(Movie movie) {
+
+        boolean Is_Added_Before_InLater = false;
+        for (int i = 0; i < MovieList.size(); i++) {
+            if (MovieList.get(i).getMovieTitle().toLowerCase().equals(movie.getMovieTitle().toLowerCase())){
+                Is_Added_Before_InLater = true;
+            }
+        }
+        if (!Is_Added_Before_InLater){
+            MovieList.add(movie);
+        }
     }
 
-    public void removeMovieFromMovieList(Movie movie) {
+    public static void removeMovieFromMovieList(Movie movie) {
         MovieList.remove(movie);
+    }
+
+    public static void getMovieList() {
+        System.out.println("Movie List : ");
+        if(MovieList.isEmpty()) {
+            System.out.println("No Movies Available");
+        } else {
+            for (int i = 0; i < MovieList.size(); i++) {
+                System.out.println(i + 1 + ") " + MovieList.get(i).getMovieTitle());
+            }
+        }
     }
 
 
@@ -190,21 +227,37 @@ public class User {
         Later.remove(movie);
     }
 
+
+    public void EditSubsciption (int changedprice){ //the parameter is the new price plan he wants to subscribe to
+
+        sub.setPriceOfPlan(changedprice);
+    }
+
     ////////////////////////////needed to be tested////////////////////////////////////////
-    public static void GetTopRatedMovie(){
+
+    public static void GetRecentMovies(int max_recent_movie_appeared) { // ne5tar limit li 3adad el haiezharo fi el recent
+
+        for (int i = 0; i < MovieList.size(); i++) {
+            if (i<=max_recent_movie_appeared){
+                System.out.println(MovieList.get(i));
+            }
+        }
+    }
+
+
+    public static void GetTopRatedMovies(){
         ArrayList <Movie> sortedMoviesRating  = new ArrayList<Movie>();
         for (int i = 0; i < MovieList.size(); i++) {
             sortedMoviesRating.add(MovieList.get(i));
         }
-
         Collections.sort(sortedMoviesRating, new Comparator<Movie>() {
-            @Override
+
             public int compare(Movie o1, Movie o2) {
                 if (o1.imdb_score<o2.imdb_score) {
-                    return -1;
+                    return 1;
                 }
                 else if (o1.imdb_score>o2.imdb_score) {
-                    return 1;
+                    return -1;
 
                 }
                 else
@@ -213,6 +266,11 @@ public class User {
                 }
             }
         });
+
+        for (int i = 0; i < sortedMoviesRating.size(); i++) {
+            System.out.println((i+1)+") "+sortedMoviesRating.get(i));
+        }
+
     }//needed to be tested
 
     public static void SearchMovieByName(String name_of_Movie){
@@ -238,4 +296,13 @@ public class User {
     }//must be discussed with ali
 
 
+    public static void SearchMovieByGenre(String genre_of_Movie) {
+        for (int i = 0; i < MovieList.size(); i++) {
+            for (int j = 0; j < MovieList.get(i).Genres.length; j++) {
+                if (MovieList.get(i).Genres[j].toLowerCase().equals(genre_of_Movie.toLowerCase())) {
+                    System.out.println(i + 1 + ") " + MovieList.get(i).getMovieTitle());
+                }
+            }
+        }
+    }
 }

@@ -7,6 +7,7 @@ public class Movie {
     ArrayList<Float> Ratings = new ArrayList<Float>();
     private boolean Is_Watched = false; // status
 
+
     private final int movieID; // can be seen by Director
 
     public String movieTitle;
@@ -15,7 +16,7 @@ public class Movie {
 
     public int RunningTime; // in minutes
 
-    private String[] Genres;
+    public String[] Genres; // Amgad 8iarha men private li public for search reasons
 
     //public Director director = new Director(); // Director object
 
@@ -118,12 +119,13 @@ public class Movie {
         return RunningTime;
     }
 
-    public void getGenres() {
-        System.out.println("this movie's genres are :");
+    public void getGenres() {   /////alinist's method
+        System.out.println("\nthis movie's genres are :");
         for(String Genre: Genres) {
             System.out.print(Genre + " ");
         }
     }
+
 
     public double getImdb_score() {
         for(int i = 0 ; i < Ratings.size() ; i++) {
@@ -151,6 +153,8 @@ public class Movie {
     public boolean getIs_Watched() {
         return Is_Watched;
     }
+
+
 
 //    public void DisplayMovieDetails() {
 //        System.out.println( this.movieTitle + " Details are : ");
