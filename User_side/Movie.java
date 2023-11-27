@@ -24,7 +24,7 @@ public class Movie {
 
     String[] Languages;
 
-    public double imdb_score;
+    public double imdb_score; // over all rating wala THE Imbd score for the actual site?
 
     public String country;
 
@@ -70,7 +70,7 @@ public class Movie {
     ///////////////////////////////////////////////Setters and Getters//////////////////////////////////////////////////
 
     public void setMovieTitle(String movieTitle) {
-        this.movieTitle = movieTitle.toLowerCase();
+        this.movieTitle = movieTitle;//.toLowerCase()
     }
 
     public void setReleaseDate(String releaseDate) {

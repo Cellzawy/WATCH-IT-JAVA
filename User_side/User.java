@@ -237,8 +237,8 @@ public class User {
 
     public static void GetRecentMovies(int max_recent_movie_appeared) { // ne5tar limit li 3adad el haiezharo fi el recent
 
-        for (int i = 0; i < MovieList.size(); i++) {
-            if (i<=max_recent_movie_appeared){
+        for (int i = MovieList.size()-1; i > 0; i--) {
+            if (i>((MovieList.size()-1)-max_recent_movie_appeared)){
                 System.out.println(MovieList.get(i));
             }
         }
@@ -293,7 +293,7 @@ public class User {
 //            }
 //        }
 //
-    }//must be discussed with ali
+    }//Regex
 
 
     public static void SearchMovieByGenre(String genre_of_Movie) {
