@@ -1,4 +1,6 @@
 import java.time.LocalDate;
+import java.time.Month;
+import java.util.Arrays;
 
 public class Subscription {
     Plan plan = new Plan();
@@ -8,6 +10,9 @@ public class Subscription {
     static int countBasic=0;
     static int countStandard=0;
     static int countPremium=0;
+
+    // Array[12] to calculate the revenue of each month
+    int[] monthlyRevenue = new int[12];
 
 
     public void setPriceOfPlan(int priceOfPlan)
@@ -54,7 +59,7 @@ public class Subscription {
         }
     }
 
-    public  void Warring(Plan plan)
+    public void Warring(Plan plan)
     {
         if(plan.numberOfMovies == 2)
         {
@@ -69,6 +74,7 @@ public class Subscription {
 
     //Revenue from Subscription
 
+    /*
     public static int RevenueBasic ()
     {
         //27sb li kol shr
@@ -88,6 +94,22 @@ public class Subscription {
     public static int TotalRevenue ()
     {
         return RevenueBasic() + RevenueStandard() + RevenuePremium();
+    }
+     */
+
+    // When the user finally confirm the plan, then this function "insertToRevenue" shall be called
+    public void insertToRevenue(int planPrice) {
+        int currentMonth = LocalDate.now().getMonthValue();
+        monthlyRevenue[currentMonth-1] += planPrice;
+        //System.out.println(currentMonth);
+    }
+
+    // Obtaining the Highest monthly revenue of all
+    public Month getHighestRevenue() {
+        int [] arr = new int[12];
+        arr = monthlyRevenue.clone();
+        Arrays.sort(arr);
+        return Month.of(arr[11]);
     }
 
 }

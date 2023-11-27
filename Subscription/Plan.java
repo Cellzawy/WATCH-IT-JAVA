@@ -38,8 +38,5 @@ public class Plan {
              days=30;
              numberOfMovies= 30;
          }
-
-
-
      }
 }
