@@ -4,6 +4,8 @@ import java.util.*;
 public class User {
     ////////////////////////////////////Fields/////////////////////////////////////////////////////////
     private final String User_ID;
+    private HashMap MoviesStatues = new HashMap();
+    private HashMap MoviesRatings = new HashMap();
     private static ArrayList<Movie> MovieList = new ArrayList<Movie>();
     private ArrayList<Movie> Watched = new ArrayList<Movie>();
     private ArrayList<Movie> Later = new ArrayList<Movie>();
@@ -33,22 +35,18 @@ public class User {
 
 
     /////////////////Certain User
-    public void SetUserRatingForMovie(Movie movie,int rating) { //the movie must be on the watched list first
-        boolean isReallyWatched = false;
-        if (rating <= 10 && rating >= 0) {
-            for (int i = 0; i < Watched.size(); i++) { //cheking if the movie with its name is on the watched list
-                if (Watched.get(i).getMovieTitle().equals(movie.getMovieTitle())) {
-                    isReallyWatched = true;
-                    break;
-                }
-            }
-        }
-
-        if (isReallyWatched) {
+    public void SetUserRatingForMovie(Movie movie,int rating) { //the movie must be on the watched list first (rating is not from the user but from the site)
+        if ((boolean)MoviesStatues.get(movie)) {
             for (int i = 0; i < Watched.size(); i++) {
-                if (movie.getMovieTitle().equals(Watched.get(i).getMovieTitle())) {
-                    Watched.get(i).user_Rating = rating;
-                    Watched.get(i).Ratings.add((float)rating);
+                if (movie.getMovieTitle().equalsIgnoreCase(Watched.get(i).getMovieTitle())) {
+                    if (rating <= 10 && rating >= 0){
+                        MoviesRatings.put(movie,rating);
+                        Watched.get(i).Ratings.add((float)rating);
+                    }
+                    else {
+                        MoviesRatings.put(movie,0);
+                        Watched.get(i).Ratings.add(0f);
+                    }
                 }
             }
 
@@ -63,18 +61,14 @@ public class User {
             System.out.println("No Movies Available");
         } else {
             for (int i = 0; i < Watched.size(); i++) {
-                if(Watched.get(i).user_Rating == -1) {
-                    System.out.println(i + 1 + ") " + Watched.get(i).getMovieTitle() + " not rated");
-                } else {
-                    System.out.println(i + 1 + ") " + Watched.get(i).getMovieTitle() + " " + Watched.get(i).user_Rating);
-                }
+                System.out.println(i + 1 + ") " + Watched.get(i).getMovieTitle() + " " + MoviesRatings.get(Watched.get(i)));
             }
         }
     }
 
     public void GetMovieStatusForUser(Movie movie){
         String movie_status;
-        if (movie.getIs_Watched()){
+        if ((boolean)MoviesStatues.get(movie)){ // m4 3arfen 2zai by4t8l bs 3la allah XDD
             movie_status = "Watched";
         }
         else{
@@ -90,10 +84,10 @@ public class User {
     /********************** START OF needed to be tested *************************/
 /////////////////All User
     public static void GetRecentMovies(int max_recent_movies_want_to_appear) { // ne5tar limit li 3adad el haiezharo fi el recent
-
-        for (int i = MovieList.size()-1; i > 0; i--) {
+        int index = 1;
+        for (int i = MovieList.size()-1; i >= 0; i--) {
             if (i>((MovieList.size()-1)-max_recent_movies_want_to_appear)){
-                System.out.println(MovieList.get(i));
+                System.out.println(index++ + ") " +MovieList.get(i).getMovieTitle());
             }
         }
     }
@@ -121,7 +115,7 @@ public class User {
         });
 
         for (int i = 0; i < sortedMoviesRating.size(); i++) {
-            System.out.println((i+1)+") "+sortedMoviesRating.get(i));
+            System.out.println((i+1)+") "+sortedMoviesRating.get(i).getMovieTitle() + " " + sortedMoviesRating.get(i).getImdb_score());
         }
 
     }
@@ -163,20 +157,21 @@ public class User {
     /// </summary>
     /// <param name="genre_of_Movie">what genre the client want to look for.</param>
     public static void SearchMovieByGenre(String genre_of_Movie) { //search on the movie list
+        int index = 1;
         for (int i = 0; i < MovieList.size(); i++) {
             for (int j = 0; j < MovieList.get(i).Genres.length; j++) {
                 if (MovieList.get(i).Genres[j].toLowerCase().equals(genre_of_Movie.toLowerCase())) {
-                    System.out.println(i + 1 + ") " + MovieList.get(i).getMovieTitle());
+                    System.out.println(index++ + ") " + MovieList.get(i).getMovieTitle());
                 }
             }
         }
     }
 
     public static void SearchMovieByName(String name_of_Movie){
-
+        int index = 1;
         for (int i = 0; i <MovieList.size(); i++) {
             if (MovieList.get(i).getMovieTitle().toLowerCase().contains(name_of_Movie.toLowerCase())){
-                System.out.println(i + 1 + ") " + MovieList.get(i).getMovieTitle());
+                System.out.println(index++ + ") " + MovieList.get(i).getMovieTitle());
             }
         }
     }
@@ -201,10 +196,11 @@ public class User {
                 List = Later;
                 break;
         }
+        int index = 1;
         for (int i = 0; i < List.size(); i++) {
             for (int j = 0; j < List.get(i).Genres.length; j++) {
                 if (List.get(i).Genres[j].toLowerCase().equals(genre_of_Movie.toLowerCase())) {
-                    System.out.println(i + 1 + ") " + List.get(i).getMovieTitle());
+                    System.out.println(index++ + ") " + List.get(i).getMovieTitle());
                 }
             }
         }
@@ -220,11 +216,12 @@ public class User {
                 List = Later;
                 break;
         }
+        int index = 1;
         for (int i = 0; i < List.size(); i++) {
-                if (List.get(i).getMovieTitle().toLowerCase().contains(name_of_Movie.toLowerCase())) {
-                    System.out.println(i + 1 + ") " + List.get(i).getMovieTitle());
-                }
+            if (List.get(i).getMovieTitle().toLowerCase().contains(name_of_Movie.toLowerCase())) {
+                System.out.println(index++ + ") " + List.get(i).getMovieTitle());
             }
+        }
     }
 
 
@@ -239,14 +236,15 @@ public class User {
             }
         }
         if (!Is_Added_Before_InWatched){
+            MoviesStatues.put(movie,true);
             Later.remove(movie);
             Watched.add(movie);
-            for (int i = 0; i < Watched.size(); i++) {
-                if (Watched.get(i).getMovieTitle().toLowerCase().equals(movie.getMovieTitle().toLowerCase())){
-                    Watched.get(i).setIs_Watched(true);
-                    break;
-                }
-            }
+//            for (int i = 0; i < Watched.size(); i++) {
+//                if (Watched.get(i).getMovieTitle().toLowerCase().equals(movie.getMovieTitle().toLowerCase())){
+//                    Watched.get(i).setIs_Watched(true);
+//                    break;
+//                }
+//            }
         }
     }
 
@@ -262,13 +260,14 @@ public class User {
     }
 
     public void removeMovieFromWatched(Movie movie) {
+        MoviesStatues.put(movie,false);
         Watched.remove(movie);
-        for (int i = 0; i < Watched.size(); i++) {
-            if (Watched.get(i).getMovieTitle().toLowerCase().equals(movie.getMovieTitle().toLowerCase())){
-                Watched.get(i).setIs_Watched(false);
-                break;
-            }
-        }
+//        for (int i = 0; i < Watched.size(); i++) {
+//            if (Watched.get(i).getMovieTitle().toLowerCase().equals(movie.getMovieTitle().toLowerCase())){
+//                Watched.get(i).setIs_Watched(false);
+//                break;
+//            }
+//        }
     }
 
 
@@ -283,14 +282,15 @@ public class User {
             }
         }
         if (!Is_Added_Before_InLater){
+            MoviesStatues.put(movie,false);
             Watched.remove(movie);
             Later.add(movie);
-            for (int i = 0; i < Later.size(); i++) {
-                if (Later.get(i).getMovieTitle().toLowerCase().equals(movie.getMovieTitle().toLowerCase())){
-                    Later.get(i).setIs_Watched(false);
-                    break;
-                }
-            }
+//            for (int i = 0; i < Later.size(); i++) {
+//                if (Later.get(i).getMovieTitle().toLowerCase().equals(movie.getMovieTitle().toLowerCase())){
+//                    Later.get(i).setIs_Watched(false);
+//                    break;
+//                }
+//            }
         }
     }
 

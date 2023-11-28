@@ -37,7 +37,7 @@ public class Movie {
 //    public Image poster = new ImageIcon(this.getClass().getResource("Source of the image"));
 
     public Movie() {
-        user_Rating = -1;
+        user_Rating = 0;
         Is_Watched = false;
 //        this.movieID = UUID.randomUUID().toString();
         this.movieID = 0;
@@ -128,10 +128,12 @@ public class Movie {
 
 
     public double getImdb_score() {
+        imdb_score = 0;
         for(int i = 0 ; i < Ratings.size() ; i++) {
             imdb_score+= Ratings.get(i);
         }
-        return imdb_score/Ratings.size();
+        double result = imdb_score/Ratings.size();
+        return Math.round(result * 10) / 10.0;
     }
 
     public String getCountry() {
