@@ -5,16 +5,16 @@ public class Movie {
     //////////////////////////////////////////////////Fields////////////////////////////////////////////////////////////
 
     ArrayList<Float> Ratings = new ArrayList<Float>();
-    private boolean Is_Watched = false; // status
+    private boolean Is_Watched= false; // status
 
 
     private final int movieID; // can be seen by Director
 
-    public String movieTitle;
+    private String movieTitle;
 
-    public LocalDate releaseDate;
+    private LocalDate releaseDate;
 
-    public int RunningTime; // in minutes
+    private int RunningTime; // in minutes
 
     public String[] Genres; // Amgad 8iarha men private li public for search reasons
 
