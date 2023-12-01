@@ -1,8 +1,10 @@
 import java.time.LocalDate;
+import java.time.Month;
 
 public class Subscription {
+
     private Plan plan = new Plan() ;
-    private  int PriceOfPlan ; // basics = 10     standard = 20    premium = 40
+    private  int PriceOfPlan ; // basics = 10     standard = 20    premium = 30
 
     int numberOfMovies;
     int days ;
@@ -11,9 +13,13 @@ public class Subscription {
     static int countBasic=0;
     static int countStandard=0;
     static int countPremium=0;
+    static int[] monthlyRevenue = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
 
 
-    public void checkSubcriptionValidity()
+    public Plan getPlan() {
+        return plan;
+    }
+    public void checkSubscriptionValidity()
     {
         if(PriceOfPlan ==  10)
         {
@@ -29,7 +35,7 @@ public class Subscription {
             StartDate = LocalDate.now();
             countStandard++;
         }
-        else if(PriceOfPlan ==  40)
+        else if(PriceOfPlan ==  30)
         {
             plan.setPlan("Premium");
             days = 30;
@@ -46,10 +52,10 @@ public class Subscription {
     public void setPriceOfPlan(int priceOfPlan)
     {
         PriceOfPlan = priceOfPlan;
-        checkSubcriptionValidity();
+        checkSubscriptionValidity();
     }
 
-    public void SubcriptionEnding()
+    public void SubscriptionEnding()
     {
         if( numberOfMovies==0 || days ==0)
         {
@@ -58,39 +64,40 @@ public class Subscription {
         }
     }
 
-    public  void Warring(Plan plan)
+    public  void Warning(Plan plan)
     {
         if(numberOfMovies == 2)
         {
             System.out.println("Be Alerted : You only have 2 movies left wi bsl ");
         }
     }
-    public void SatuesSubscription()
+    public void StatusSubscription()
     {
         System.out.println("Subscription: "+ plan.getPlan()+"     Number Of Movies left: "+numberOfMovies +"     Days left: "+days);
     }
 
     //Revenue from Subscription
 
+    public void renewSubscription(User user) {
+        days = 30;
+        int currentMonth = LocalDate.now().getMonth().getValue();
+        monthlyRevenue[currentMonth - 1] += PriceOfPlan;
+    }
+
     public static int RevenueBasic ()
     {
-        //27sb li kol shr
-
         return countBasic*10;
     }
     public static int RevenueStandard ()
     {
-        //27sb li kol shr
         return countStandard*20;
     }
     public static int RevenuePremium ()
     {
-        //27sb li kol shr
-        return countPremium*40;
+        return countPremium*30;
     }
     public static int TotalRevenue ()
     {
         return RevenueBasic() + RevenueStandard() + RevenuePremium();
     }
-
 }

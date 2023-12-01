@@ -4,6 +4,8 @@ import java.util.*;
 public class User {
     ////////////////////////////////////Fields/////////////////////////////////////////////////////////
     private final String User_ID;
+    protected boolean suspended = false;
+    protected boolean loggedIn = false;
     private HashMap MoviesStatues = new HashMap();
     private HashMap MoviesRatings = new HashMap();
     private static ArrayList<Movie> MovieList = new ArrayList<Movie>();
@@ -28,6 +30,12 @@ public class User {
 
     public String getUser_ID() {
         return User_ID;
+    }
+    public HashMap getUserRatingsForMovie() {
+        return MoviesRatings;
+    }
+    public boolean getSuspendedValue() {
+        return suspended;
     }
 
 
@@ -55,7 +63,7 @@ public class User {
         }
     }
 
-    public void getUserRatingForMovie() {
+    public void displayUserRatingsForMovie() {
         System.out.println("Watched Movie List : ");
         if(Watched.isEmpty()) {
             System.out.println("No Movies Available");

@@ -1,5 +1,8 @@
 import java.util.ArrayList;
-
+import java.util.HashMap;
+import java.util.Arrays;
+import java.time.LocalDate;
+import java.time.Month;
 
 public class Admin extends User{
 
@@ -21,28 +24,60 @@ public class Admin extends User{
         movieList.remove(movie);
     }
     public void resetRating(Movie movie) {
-        movie.setRatings(null);
+        for (Float rating : movie.Ratings) {
+            rating = 0f;
+        }
     }
     public void removeRating(Movie movie, User user) {
-        Rating[] ratings = movie.getRatings();
-        for (int i = 0; i < ratings.length; i++) {
-            if (ratings[i] != null && ratings[i].getUser() == user) {
-                ratings[i] = null;
-                break;
-            }
+        HashMap ratings = user.getUserRatingsForMovie();
+        if (ratings.containsKey(movie)) {
+            ratings.remove(movie);
         }
     }
     public void suspendAccount(User user) {
-        user.suspended = true;
+        if (suspended) {
+            System.out.println("User already suspended.");
+        }
+        else {
+            user.suspended = true;
+            System.out.println("User successfully suspended.");
+        }
     }
     public void unsuspendAccount(User user) {
-        user.suspended = false;
+        if (suspended) {
+            user.suspended = false;
+            System.out.println("User already suspended.");
+        }
+        else {
+            System.out.println("User already not suspended.");
+        }
     }
     public String getMostRevMonth() {
-        return "h";
+        int max = 0;
+        int index = 0;
+        for (int i = 0; i < 12; i++) {
+            if (Subscription.monthlyRevenue[i] > max) {
+                max = Subscription.monthlyRevenue[i];
+                index = i;
+            }
+        }
+        return Month.of(index + 1).toString();
     }
     public String getMostSubbedPlan() {
-        return "h";
+        HashMap<String, Integer> plansCount = new HashMap<>();
+        plansCount.put("Basic", Subscription.countBasic);
+        plansCount.put("Standard", Subscription.countStandard);
+        plansCount.put("Premium", Subscription.countPremium);
+
+        HashMap.Entry<String, Integer> max = null;
+
+        for (HashMap.Entry<String, Integer> entry : plansCount.entrySet()) {
+            if (max == null || entry.getValue().compareTo(max.getValue()) > 0) {
+                max = entry;
+            }
+        }
+
+        return max.getKey();
     }
 
 }
