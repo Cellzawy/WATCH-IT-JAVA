@@ -6,16 +6,12 @@ public class Plan {
     /* Attributes */
     int numberOfMovies;        // Maximum Number of movies allowed to the user according to the plan type
     String typeOfPlan;               // The chosen plan
-
-    boolean is_subscribed;     // Determining if the user is still subscribed or not
-
     Calendar StartDate;
     // A counter for each plan subscribed
     // will be accessed by the admin to see the most subscribed plan among
 
 
     /* End of Attributes*/
-
 
     public void setTypeOfPlan(String typeOfPlan)
     {

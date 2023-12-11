@@ -1,20 +1,16 @@
-import java.time.LocalDate;
-import java.util.Arrays;
+import java.util.Calendar;
+
+import static java.lang.Math.pow;
 
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(String[] args) {
+        Calendar today= Calendar.getInstance();
+        Subscription sub = new Subscription();
+        sub.setPriceOfPlan(10);
+        sub.CheckIfSubscriptionEnding(today);
 
-      Subscription x = new Subscription();
-      x.setPriceOfPlan(10);
-
-      x.StatusSubscription();
-
-        Subscription y = new Subscription();
-        y.setPriceOfPlan(30);
-
-        y.StatusSubscription();
 
     }
 }
