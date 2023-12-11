@@ -1,12 +1,12 @@
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.Arrays;
+import java.util.Date;
+import java.util.Calendar;
 
 public class Subscription {
     Plan plan = new Plan();
     int PriceOfPlan ; // basics = 10     standard = 15   premium = 30
-    LocalDate StartDate;
-
     static int countBasic=0;
     static int countStandard=0;
     static int countPremium=0;
@@ -26,76 +26,92 @@ public class Subscription {
         if( PriceOfPlan ==  10)
         {
             plan.setTypeOfPlan("Basic");
-            StartDate = LocalDate.now();
             countBasic++;
         }
         else if(PriceOfPlan ==  15)
         {
             plan.setTypeOfPlan("Standard");
-            StartDate = LocalDate.now();
             countStandard++;
         }
         else if(PriceOfPlan ==  30)
         {
             plan.setTypeOfPlan("Premium");
-            StartDate = LocalDate.now();
             countPremium++;
         }
         else
         {
             plan.setTypeOfPlan("Unsubcribed");
-            plan.days = 0;
-            plan.numberOfMovies =0;
         }
     }
 
-
-    public void SubcriptionEnding()
+    public void CheckIfSubcriptionEnding(Calendar today)
     {
-        if( plan.numberOfMovies==0 || plan.days ==0)
+        int SECONDS_IN_A_DAY = 24 * 60 * 60;
+        long diff =  today.getTimeInMillis() - plan.StartDate.getTimeInMillis();
+        long diffSec = diff / 1000;
+        long days = diffSec / SECONDS_IN_A_DAY;
+        long secondsDay = diffSec % SECONDS_IN_A_DAY;
+        long seconds = secondsDay % 60;
+        long minutes = (secondsDay / 60) % 60;
+        long hours = (secondsDay / 3600); // % 24 not needed
+
+        try{
+            if( plan.numberOfMovies==0 || days == 0)
+            {
+                setPriceOfPlan(0);
+
+            }
+        }
+        catch (NullPointerException nullPointerException)
         {
-           setPriceOfPlan(0);
-           System.out.println("Your current Subcription has ended");
+            System.out.println("Your current Subcription has ended");
         }
     }
 
-    public void Warring(Plan plan)
+    public void Warring(Calendar today)
     {
-        if(plan.numberOfMovies == 2)
+        int SECONDS_IN_A_DAY = 24 * 60 * 60;
+        long diff =  today.getTimeInMillis() - plan.StartDate.getTimeInMillis();
+        long diffSec = diff / 1000;
+        long days = diffSec / SECONDS_IN_A_DAY;
+        long secondsDay = diffSec % SECONDS_IN_A_DAY;
+        long seconds = secondsDay % 60;
+        long minutes = (secondsDay / 60) % 60;
+        long hours = (secondsDay / 3600); // % 24 not needed
+        if(plan.numberOfMovies == 2 || days == 10)
         {
-            System.out.println("Be Alerted : You only have 2 movies left wi bsl ");
+            System.out.println("Be Alerted : You only have 2 movies left");
         }
     }
-    public void StatusSubscription()
+
+
+    public void StatusSubscription(Calendar today)
     {
-        System.out.println("Subscription: "+ plan.typeOfPlan+"     Number Of Movies left: "+plan.numberOfMovies +"     Days left: "+plan.days);
+        try
+        {
+            System.out.println("Subscription: "+ plan.typeOfPlan+"     Number Of Movies left: "+plan.numberOfMovies);
+            CalculateTime(today);
+        }
+        catch (NullPointerException nullPointerException)
+        {
+            System.out.println("Time left: No Time left");
+        }
     }
 
+    public void CalculateTime(Calendar today)
+    {
+        int SECONDS_IN_A_DAY = 24 * 60 * 60;
+        long diff =  today.getTimeInMillis() - plan.StartDate.getTimeInMillis();
+        long diffSec = diff / 1000;
+        long days = diffSec / SECONDS_IN_A_DAY;
+        long secondsDay = diffSec % SECONDS_IN_A_DAY;
+        long seconds = secondsDay % 60;
+        long minutes = (secondsDay / 60) % 60;
+        long hours = (secondsDay / 3600); // % 24 not needed
+        System.out.printf("Time left: %d days, %d hours, %d minutes and %d seconds\n", days, hours, minutes, seconds);
+    }
 
     //Revenue from Subscription
-
-    /*
-    public static int RevenueBasic ()
-    {
-        //27sb li kol shr
-
-        return countBasic*10;
-    }
-    public static int RevenueStandard ()
-    {
-        //27sb li kol shr
-        return countStandard*15;
-    }
-    public static int RevenuePremium ()
-    {
-        //27sb li kol shr
-        return countPremium*30;
-    }
-    public static int TotalRevenue ()
-    {
-        return RevenueBasic() + RevenueStandard() + RevenuePremium();
-    }
-     */
 
     // When the user finally confirm the plan, then this function "insertToRevenue" shall be called
     public void insertToRevenue(int planPrice) {
