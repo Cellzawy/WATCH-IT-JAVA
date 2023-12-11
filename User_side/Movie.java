@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.time.LocalDate;
 import java.util.*;
 public class Movie {
@@ -6,7 +7,7 @@ public class Movie {
 
     ArrayList<Float> Ratings = new ArrayList<Float>();
     private boolean Is_Watched= false; // status
-
+    public int watchcount = 0;
 
     private final int movieID; // can be seen by Director
 
@@ -20,7 +21,7 @@ public class Movie {
 
     //public Director director = new Director(); // Director object
 
-    //private Cast cast[]; // Defining the array of cast
+    //private Actor cast[]; // Defining the array of cast
 
     String[] Languages;
 
@@ -33,8 +34,6 @@ public class Movie {
     public double revenue;
 
     public int user_Rating; // user rating for that movie
-
-//    public Image poster = new ImageIcon(this.getClass().getResource("Source of the image"));
 
     public Movie() {
         user_Rating = 0;

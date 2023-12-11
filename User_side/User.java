@@ -44,7 +44,7 @@ public class User {
 
     /////////////////Certain User
     public void SetUserRatingForMovie(Movie movie,int rating) { //the movie must be on the watched list first (rating is not from the user but from the site)
-        if ((boolean)MoviesStatues.get(movie)) {
+        if (MoviesStatues.get(movie) == null || (boolean) MoviesStatues.get(movie)) {
             for (int i = 0; i < Watched.size(); i++) {
                 if (movie.getMovieTitle().equalsIgnoreCase(Watched.get(i).getMovieTitle())) {
                     if (rating <= 10 && rating >= 0){
@@ -127,6 +127,35 @@ public class User {
         }
 
     }
+
+    public static void GetTopWatchedMovies(){
+        ArrayList <Movie> sortedMoviesRating  = new ArrayList<Movie>();
+        for (int i = 0; i < MovieList.size(); i++) {
+            sortedMoviesRating.add(MovieList.get(i));
+        }
+        Collections.sort(sortedMoviesRating, new Comparator<Movie>() {
+
+            public int compare(Movie o1, Movie o2) {
+                if (o1.watchcount<o2.watchcount) {
+                    return 1;
+                }
+                else if (o1.watchcount>o2.watchcount) {
+                    return -1;
+
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+        });
+
+        for (int i = 0; i < sortedMoviesRating.size(); i++) {
+            System.out.println((i+1)+") "+sortedMoviesRating.get(i).getMovieTitle() + " " + sortedMoviesRating.get(i).watchcount);
+        }
+
+    }
+
 
 
     /////////////////MovieList
@@ -244,6 +273,7 @@ public class User {
             }
         }
         if (!Is_Added_Before_InWatched){
+            movie.watchcount++;
             MoviesStatues.put(movie,true);
             Later.remove(movie);
             Watched.add(movie);
@@ -269,6 +299,9 @@ public class User {
 
     public void removeMovieFromWatched(Movie movie) {
         MoviesStatues.put(movie,false);
+        if(Watched.remove(movie)) {
+            movie.watchcount--;
+        }
         Watched.remove(movie);
 //        for (int i = 0; i < Watched.size(); i++) {
 //            if (Watched.get(i).getMovieTitle().toLowerCase().equals(movie.getMovieTitle().toLowerCase())){
