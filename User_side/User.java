@@ -273,17 +273,24 @@ public class User {
                 break;
             }
         }
+
         if (!Is_Added_Before_InWatched){
-            movie.watchCount++;
-            MoviesStatues.put(movie,true);
-            Later.remove(movie);
-            Watched.add(movie);
-//            for (int i = 0; i < Watched.size(); i++) {
-//                if (Watched.get(i).getMovieTitle().toLowerCase().equals(movie.getMovieTitle().toLowerCase())){
-//                    Watched.get(i).setIs_Watched(true);
-//                    break;
-//                }
-//            }
+            Calendar today = Calendar.getInstance();
+            if (subscription.plan.numberOfMovies ==2){ //can be done in main gui will be better
+               subscription.Warring();
+            }
+            if (subscription.plan.numberOfMovies >0 && subscription.CheckIfSubscriptionEnding(today)){
+                subscription.plan.numberOfMovies--;
+                MoviesStatues.put(movie,true);
+                Later.remove(movie);
+                Watched.add(movie);
+            }
+            else
+            {
+                subscription.CheckIfSubscriptionEnding(today);
+
+            }
+
         }
     }
 
