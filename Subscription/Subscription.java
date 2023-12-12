@@ -4,12 +4,32 @@ import java.util.Arrays;
 import java.util.Calendar;
 
 public class Subscription {
+
+    /**
+     * Type plan is used
+     */
     Plan plan = new Plan();
+
+    /**
+     * The price of PLan
+     */
     int PriceOfPlan ;
+    /**
+     * the number of users who subscribe to Basic plan
+     */
     static int countBasic=0;
+    /**
+     * the number of users who subscribe to Standard plan
+     */
     static int countStandard=0;
+    /**
+     * the number of users who subscribe to Premium plan
+     */
     static int countPremium=0;
 
+    /**
+     * Represent all the 12 month
+     */
     // Array[12] to calculate the revenue of each month
     int[] monthlyRevenue = new int[12];
 
@@ -92,7 +112,6 @@ public class Subscription {
             System.out.println("Be Alerted : You only have 2 movies left");
         }
     }
-
 
     /** Send current status of the user's subscription
      * @param today to get the real life current time
