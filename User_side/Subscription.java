@@ -1,103 +1,154 @@
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.Arrays;
+import java.util.Calendar;
 
 public class Subscription {
-
-    private Plan plan = new Plan() ;
-    private  int PriceOfPlan ; // basics = 10     standard = 20    premium = 30
-
-    int numberOfMovies;
-    int days ;
-    LocalDate StartDate;
-
+    Plan plan = new Plan();
+    int PriceOfPlan ;
     static int countBasic=0;
     static int countStandard=0;
     static int countPremium=0;
-    static int[] monthlyRevenue = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
+
+    // Array[12] to calculate the revenue of each month
+    int[] monthlyRevenue = new int[12];
 
 
-    public Plan getPlan() {
-        return plan;
-    }
-    public void checkSubscriptionValidity()
+    /**
+     * Assign PriceOfPlan and set witch Subscription the user chose
+     * @param priceOfPlan the amount of money the user chose */
+    public void setPriceOfPlan(int priceOfPlan)
     {
-        if(PriceOfPlan ==  10)
+
+        PriceOfPlan = priceOfPlan;
+        setSubscription();
+    }
+
+
+    /**
+     * This method compare the mount of money the user chose to witch type the money entered is sufficient for  */
+    public void setSubscription()
+    {
+        if( PriceOfPlan ==  10)
         {
-            plan.setPlan("Basic");
-            days = 30;
-            StartDate = LocalDate.now();
+            plan.setTypeOfPlan("Basic");
             countBasic++;
         }
-        else if(PriceOfPlan ==  20)
+        else if(PriceOfPlan ==  15)
         {
-            plan.setPlan("Standard");
-            days = 30;
-            StartDate = LocalDate.now();
+            plan.setTypeOfPlan("Standard");
             countStandard++;
         }
         else if(PriceOfPlan ==  30)
         {
-            plan.setPlan("Premium");
-            days = 30;
-            StartDate = LocalDate.now();
+            plan.setTypeOfPlan("Premium");
             countPremium++;
         }
         else
         {
-            plan.setPlan("Unknown");
-            days = 0;
+            plan.setTypeOfPlan("Unsubcribed");
         }
     }
 
-    public void setPriceOfPlan(int priceOfPlan)
-    {
-        PriceOfPlan = priceOfPlan;
-        checkSubscriptionValidity();
-    }
 
-    public void SubscriptionEnding()
+    /**
+     * Check if the user's subscription has ended
+     * @param today to get the real life current time
+     */
+    public boolean CheckIfSubscriptionEnding(Calendar today)
     {
-        if( numberOfMovies==0 || days ==0)
+        try{
+            int SECONDS_IN_A_DAY = 24 * 60 * 60;
+            long diff =  today.getTimeInMillis() - plan.StartDate.getTimeInMillis();
+            long diffSec = diff / 1000;
+            long days = diffSec / SECONDS_IN_A_DAY;
+
+
+            if( plan.numberOfMovies==0 || days == 0)
+            {
+                setPriceOfPlan(0);
+                System.out.println("You have no movies or day left then your subscription has ended");
+                return false;
+            }
+        }
+        catch (NullPointerException nullPointerException)
         {
-            plan.setPlan("Unkown");//change it to NULL
-            System.out.println("Your current Subcription has ended");
+            System.out.println("You are  Unsubscribe");
+            return false;
+        }
+        return true;
+    }
+
+
+    /**
+     * If the remaining user's day or number of movies left is near the end
+     * this method sends a warring
+     * @param today to get the real life current time
+     */
+    public void Warring()
+    {
+
+        if(plan.numberOfMovies == 2 )
+        {
+            System.out.println("Be Alerted : You only have 2 movies left");
         }
     }
 
-    public  void Warning(Plan plan)
+    /** Send current status of the user's subscription
+     * @param today to get the real life current time
+     */
+    public void StatusSubscription(Calendar today)
     {
-        if(numberOfMovies == 2)
+        try
         {
-            System.out.println("Be Alerted : You only have 2 movies left wi bsl ");
+            System.out.println("Subscription: "+ plan.typeOfPlan+"     Number Of Movies left: "+plan.numberOfMovies);
+            CalculateTime(today);
+        }
+        catch (NullPointerException nullPointerException)
+        {
+            System.out.println("Time left: No Time left");
         }
     }
-    public void StatusSubscription()
+
+    /** To calculate the days,the hours,the minutes and the seconds left
+     * by using the different between the current time and the start date of the user's subscription
+     * @param today to get the real life current time
+     */
+    public void CalculateTime(Calendar today)
     {
-        System.out.println("Subscription: "+ plan.getPlan()+"     Number Of Movies left: "+numberOfMovies +"     Days left: "+days);
+        int SECONDS_IN_A_DAY = 24 * 60 * 60;
+        long diff =  today.getTimeInMillis() - plan.StartDate.getTimeInMillis();
+        long diffSec = diff / 1000;
+        long days = diffSec / SECONDS_IN_A_DAY;
+        long secondsDay = diffSec % SECONDS_IN_A_DAY;
+        long seconds = secondsDay % 60;
+        long minutes = (secondsDay / 60) % 60;
+        long hours = (secondsDay / 3600); // % 24 not needed
+
+        System.out.printf("Time left: %d days, %d hours, %d minutes and %d seconds\n", days, hours, minutes, seconds);
     }
 
     //Revenue from Subscription
 
-    public void renewSubscription(User user) {
-        days = 30;
-        int currentMonth = LocalDate.now().getMonth().getValue();
-        monthlyRevenue[currentMonth - 1] += PriceOfPlan;
+    /**
+     * @param planPrice
+     */
+    // When the user finally confirm the plan, then this function "insertToRevenue" shall be called
+    public void insertToRevenue(int planPrice) {
+        int currentMonth = LocalDate.now().getMonthValue();
+        monthlyRevenue[currentMonth-1] += planPrice;
+        //System.out.println(currentMonth);
     }
 
-    public static int RevenueBasic ()
-    {
-        return countBasic*10;
-    }
-    public static int RevenueStandard ()
-    {
-        return countStandard*20;
-    }
-    public static int RevenuePremium ()
-    {
-        return countPremium*30;
-    }
-    public static int TotalRevenue ()
-    {
-        return RevenueBasic() + RevenueStandard() + RevenuePremium();
+    /**
+     * Obtaining the Highest monthly revenue of all 12 month
+     * @return the Highest monthly revenue of all 12 month
+     */
+    // Obtaining the Highest monthly revenue of all
+    public Month getHighestRevenue() {
+        int [] arr = new int[12];
+        arr = monthlyRevenue.clone();
+        Arrays.sort(arr);
+        return Month.of(arr[11]);
     }
 }
