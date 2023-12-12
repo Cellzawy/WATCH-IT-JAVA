@@ -75,39 +75,38 @@ public class Subscription {
      * Check if the user's subscription has ended
      * @param today to get the real life current time
      */
-    public void CheckIfSubscriptionEnding(Calendar today)
+    public boolean CheckIfSubscriptionEnding(Calendar today)
     {
+        try{
         int SECONDS_IN_A_DAY = 24 * 60 * 60;
         long diff =  today.getTimeInMillis() - plan.StartDate.getTimeInMillis();
         long diffSec = diff / 1000;
         long days = diffSec / SECONDS_IN_A_DAY;
 
-        try{
+
             if( plan.numberOfMovies==0 || days == 0)
             {
                 setPriceOfPlan(0);
+                System.out.println("You have no movies or day left then your subscription has ended");
+                return false;
             }
         }
         catch (NullPointerException nullPointerException)
         {
-            System.out.println("Your current Subcription has ended");
+            System.out.println("You are  Unsubscribe");
+            return false;
         }
+        return true;
     }
 
 
     /**
-     * If the remaining user's day or number of movies left is near the end
+     * If the remaining user's number of movies left is near the end
      * this method sends a warring
-     * @param today to get the real life current time
      */
-    public void Warring(Calendar today)
+    public void Warring()
     {
-        int SECONDS_IN_A_DAY = 24 * 60 * 60;
-        long diff =  today.getTimeInMillis() - plan.StartDate.getTimeInMillis();
-        long diffSec = diff / 1000;
-        long days = diffSec / SECONDS_IN_A_DAY;
-
-        if(plan.numberOfMovies == 2 || days == 10)
+        if(plan.numberOfMovies == 2)
         {
             System.out.println("Be Alerted : You only have 2 movies left");
         }
