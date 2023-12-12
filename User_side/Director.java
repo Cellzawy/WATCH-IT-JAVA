@@ -39,6 +39,10 @@ public class Director extends Person {
         this.awards = awards;
     }
 
+    public Director() {
+        super();
+    }
+
     public int getNumber_of_awards() {
         return awards.size();
     }

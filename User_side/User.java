@@ -8,9 +8,9 @@ public class User {
     protected boolean loggedIn = false;
     private HashMap MoviesStatues = new HashMap();
     private HashMap MoviesRatings = new HashMap();
-    private static ArrayList<Movie> MovieList = new ArrayList<Movie>();
-    private ArrayList<Movie> Watched = new ArrayList<Movie>();
-    private ArrayList<Movie> Later = new ArrayList<Movie>();
+    private static ArrayList<Movie> MovieList = new ArrayList<>();
+    private ArrayList<Movie> Watched = new ArrayList<>();
+    private ArrayList<Movie> Later = new ArrayList<>();
     public Subscription subscription = new Subscription();
     private String first_name;
     private String last_name;
@@ -18,6 +18,7 @@ public class User {
     private String user_password;
     private String theme_preference;
 
+    private ArrayList<Watch_Record> userWatchRecord = new ArrayList<>();
 
     /********************** Constructor**********************/
 
@@ -47,7 +48,7 @@ public class User {
         if (MoviesStatues.get(movie) == null || (boolean) MoviesStatues.get(movie)) {
             for (int i = 0; i < Watched.size(); i++) {
                 if (movie.getMovieTitle().equalsIgnoreCase(Watched.get(i).getMovieTitle())) {
-                    if (rating <= 10 && rating >= 0){
+                    if (rating <= 5 && rating >= 1){
                         MoviesRatings.put(movie,rating);
                         Watched.get(i).Ratings.add((float)rating);
                     }
@@ -136,10 +137,10 @@ public class User {
         Collections.sort(sortedMoviesRating, new Comparator<Movie>() {
 
             public int compare(Movie o1, Movie o2) {
-                if (o1.watchcount<o2.watchcount) {
+                if (o1.watchCount <o2.watchCount) {
                     return 1;
                 }
-                else if (o1.watchcount>o2.watchcount) {
+                else if (o1.watchCount >o2.watchCount) {
                     return -1;
 
                 }
@@ -151,7 +152,7 @@ public class User {
         });
 
         for (int i = 0; i < sortedMoviesRating.size(); i++) {
-            System.out.println((i+1)+") "+sortedMoviesRating.get(i).getMovieTitle() + " " + sortedMoviesRating.get(i).watchcount);
+            System.out.println((i+1)+") "+sortedMoviesRating.get(i).getMovieTitle() + " " + sortedMoviesRating.get(i).watchCount);
         }
 
     }
@@ -273,7 +274,7 @@ public class User {
             }
         }
         if (!Is_Added_Before_InWatched){
-            movie.watchcount++;
+            movie.watchCount++;
             MoviesStatues.put(movie,true);
             Later.remove(movie);
             Watched.add(movie);
@@ -300,15 +301,9 @@ public class User {
     public void removeMovieFromWatched(Movie movie) {
         MoviesStatues.put(movie,false);
         if(Watched.remove(movie)) {
-            movie.watchcount--;
+            movie.watchCount--;
         }
         Watched.remove(movie);
-//        for (int i = 0; i < Watched.size(); i++) {
-//            if (Watched.get(i).getMovieTitle().toLowerCase().equals(movie.getMovieTitle().toLowerCase())){
-//                Watched.get(i).setIs_Watched(false);
-//                break;
-//            }
-//        }
     }
 
 
@@ -326,12 +321,6 @@ public class User {
             MoviesStatues.put(movie,false);
             Watched.remove(movie);
             Later.add(movie);
-//            for (int i = 0; i < Later.size(); i++) {
-//                if (Later.get(i).getMovieTitle().toLowerCase().equals(movie.getMovieTitle().toLowerCase())){
-//                    Later.get(i).setIs_Watched(false);
-//                    break;
-//                }
-//            }
         }
     }
 
@@ -348,12 +337,6 @@ public class User {
 
     public void removeMovieFromLater(Movie movie) {
         Later.remove(movie);
-//        for (int i = 0; i < Later.size(); i++) {  maslan 7at el film bil 8alat
-//            if (Later.get(i).getMovieTitle().toLowerCase().equals(movie.getMovieTitle().toLowerCase())){
-//                Later.get(i).setIs_Watched(false);
-//                break;
-//            }
-//        }
     }
 
     /********************** END OF needed to be tested *************************/
