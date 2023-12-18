@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: rgb(0,0,0,0.9);;" styleClass="body" stylesheets="@WatchList.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.oopjavafx.WatchListController">
+   <children>
+      <Button fx:id="Furga" layoutX="187.0" layoutY="62.0" mnemonicParsing="false" onAction="#HomePage" style="-fx-background-color: transparent;" styleClass="labels" stylesheets="@WatchList.css" text="Furga" />
+      <TextField layoutX="442.0" layoutY="74.0" prefHeight="59.0" prefWidth="631.0" styleClass="search" stylesheets="@WatchList.css">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </TextField>
+      <Line endX="-50.0" endY="7.62939453125E-6" fill="WHITE" layoutX="1757.0" layoutY="304.0" scaleY="1.5" startX="-625.0" startY="2.5928020477294922E-5" stroke="WHITE" />
+      <Line endX="9.2000732421875" endY="-3.0517578125E-5" fill="WHITE" layoutX="790.0" layoutY="304.0" startX="-586.5999755859375" startY="-2.288818359375E-5" stroke="WHITE" />
+      <Label layoutX="844.0" layoutY="273.0" styleClass="labels" stylesheets="@WatchList.css" text="Watch list" textFill="WHITE">
+         <font>
+            <Font name="Fredoka Bold" size="50.0" />
+         </font>
+      </Label>
+      <JFXButton id="subscription" layoutX="1221.0" layoutY="65.0" prefHeight="70.0" prefWidth="316.0" stylesheets="@WatchList.css" text="subscription" />
+      <ImageView fx:id="menu" fitHeight="142.0" fitWidth="136.0" layoutX="1583.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true" scaleX="0.75" scaleY="0.75">
+         <image>
+            <Image url="@Images/menuicon.png" />
+         </image>
+      </ImageView>
+      <HBox layoutX="183.0" layoutY="376.0" prefHeight="676.0" prefWidth="1564.0">
+         <children>
+            <ScrollPane prefHeight="676.0" prefWidth="1560.0" style="-fx-background-color: transparent;">
+               <content>
+                  <VBox fx:id="MovieListLayout" prefHeight="2169.0" prefWidth="1540.0" spacing="20.0" style="-fx-background-color: rgb(0,0,0,0.9);" />
+               </content>
+            </ScrollPane>
+         </children>
+      </HBox>
+      <AnchorPane fx:id="pane1" prefHeight="1080.0" prefWidth="1392.0" style="-fx-background-color: #2d2d2d;" />
+      <AnchorPane id="menu" fx:id="pane2" layoutX="1392.0" layoutY="2.0" prefHeight="1080.0" prefWidth="537.0" style="-fx-background-color: #000000;" stylesheets="@WatchList.css">
+         <children>
+            <JFXButton focusTraversable="false" layoutX="70.0" layoutY="471.0" prefHeight="112.0" prefWidth="405.0" ripplerFill="#ffffff00" styleClass="Subscription" stylesheets="@Style.css" text="Watched List" textFill="WHITE">
+               <font>
+                  <Font name="Fredoka Bold" size="44.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="Later" focusTraversable="false" layoutX="70.0" layoutY="621.0" onAction="#Later" prefHeight="112.0" prefWidth="405.0" ripplerFill="#ffffff00" styleClass="Subscription" stylesheets="@Style.css" text="Later List" textFill="WHITE">
+               <font>
+                  <Font name="Fredoka Bold" size="44.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="Logout" focusTraversable="false" layoutX="70.0" layoutY="771.0" onAction="#Logout" prefHeight="112.0" prefWidth="405.0" ripplerFill="#ffffff00" style="-fx-text-fill: red;" styleClass="Subscription" stylesheets="@Style.css" text="Log out" textFill="WHITE">
+               <font>
+                  <Font name="Fredoka Bold" size="44.0" />
+               </font>
+            </JFXButton>
+            <ImageView fitHeight="313.0" fitWidth="313.0" layoutX="110.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Images/icons8-person-96.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

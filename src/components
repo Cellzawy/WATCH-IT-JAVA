@@ -1,0 +1,42 @@
+
+#1 - Changing to another scene {
+        IN FIELDS SECTION DEFINE :
+        ->private parent root;
+        ->private Scene scene;
+        ->private Stage stage;
+
+        IN THE METHOD :
+        ->root = FXMLLoader.load(getClass().getResource("Example.fxml"));
+        ->stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        ->scene1 = new Scene(root);
+        ->stage.setScene(scene1);
+        ->stage.show();
+}
+
+#2 - Random String of chars generator {
+    public String WhateverGenerator() {
+            String string = "Whatever";
+            StringBuilder s = new StringBuilder(size);
+            for (int i = 0; i < size; i++) {
+                int index = (int)(string.length() * Math.random());
+                s.append(AlphaNumericString.charAt(index));
+            }
+            return s.toString();
+        }
+}
+
+#3 - Timer {
+    Thread Timer = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for(int i = timeInSeconds ; i> 0 ; i--) {
+                    System.out.println();
+                    try {
+                        Thread.sleep(1000);
+                    } catch (Exception e) {
+                        System.out.println("error");
+                    }
+                }
+            }
+        });
+}

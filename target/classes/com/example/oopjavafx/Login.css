@@ -1,0 +1,29 @@
+#checkbox .box{
+    -fx-background-color : #4dde90;
+}
+
+#emailField,
+#passwordField {
+    -fx-text-fill : #4dde90;
+}
+
+.changetologin {
+    -fx-background-color : transparent;
+    -fx-border-color :  transparent;
+    -fx-border-style :  solid;
+    -fx-padding :  0 0 -5px 0;
+}
+
+.changetologin:hover {
+    -fx-border-color :  transparent transparent #4dde90;
+}
+
+#button {
+    -fx-background-color : #4dde90;
+    -fx-background-radius : 30px;
+}
+
+#button:hover {
+    -fx-background-color : #2f2f2f;
+    -fx-text-fill : #4dde90;
+}

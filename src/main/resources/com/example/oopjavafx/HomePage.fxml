@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.86" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: #000000;" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.oopjavafx.HomePageController">
+   <children>
+      <AnchorPane id="home" prefHeight="1080.0" prefWidth="1920.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <TextField focusTraversable="false" layoutX="347.0" layoutY="76.0" prefHeight="68.0" prefWidth="835.0" promptText="Search....." styleClass="Search" stylesheets="@Style.css">
+               <font>
+                  <Font name="Fredoka Bold" size="36.0" />
+               </font>
+            </TextField>
+            <Label focusTraversable="false" layoutX="115.0" layoutY="69.0" prefHeight="86.0" prefWidth="144.0" style="-fx-text-fill: #4dde90;" text="Furga" textFill="#4dde90">
+               <font>
+                  <Font name="Fredoka Bold" size="48.0" />
+               </font>
+            </Label>
+            <JFXButton focusTraversable="false" layoutX="1348.0" layoutY="69.0" prefHeight="80.0" prefWidth="307.0" ripplerFill="#4dde9000" style="-fx-border-color: #4DDE90;" styleClass="Subscription" stylesheets="@Style.css" text="Subscription" textFill="WHITE">
+               <font>
+                  <Font name="Fredoka Bold" size="36.0" />
+               </font>
+            </JFXButton>
+            <Group layoutX="544.0" layoutY="455.0">
+               <children>
+                  <ImageView fx:id="ImageView2" fitHeight="505.0" fitWidth="376.0" layoutX="1.0" pickOnBounds="true">
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                  </ImageView>
+                  <JFXButton fx:id="myButton2" focusTraversable="false" layoutX="3.0" prefHeight="505.0" prefWidth="376.0" ripplerFill="WHITE" style="-fx-text-fill: transparent; -fx-background-color: transparent;" styleClass="ImageStructure" stylesheets="@Style.css" text="Image" />
+               </children>
+            </Group>
+            <JFXButton fx:id="ForYouButton" focusTraversable="false" layoutX="410.0" layoutY="176.0" onAction="#ForYou_Controller" prefHeight="80.0" prefWidth="307.0" ripplerFill="#ffffff00" styleClass="DefaultButton" text="For you" textFill="WHITE">
+               <font>
+                  <Font name="Fredoka Bold" size="43.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="TrendingButton" focusTraversable="false" layoutX="715.0" layoutY="176.0" onAction="#Trending_Controller" prefHeight="80.0" prefWidth="307.0" ripplerFill="#ffffff00" styleClass="DefaultButton" text="Trending" textFill="WHITE">
+               <font>
+                  <Font name="Fredoka Bold" size="43.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="PopularButton" focusTraversable="false" layoutX="1020.0" layoutY="176.0" onAction="#Popular_Controller" prefHeight="80.0" prefWidth="307.0" ripplerFill="#ffffff00" styleClass="DefaultButton" text="Popular" textFill="WHITE">
+               <font>
+                  <Font name="Fredoka Bold" size="43.0" />
+               </font>
+            </JFXButton>
+            <Group layoutX="153.0" layoutY="445.0">
+               <children>
+                  <ImageView fx:id="ImageView1" fitHeight="505.0" fitWidth="376.0" layoutX="1.0" pickOnBounds="true">
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                  </ImageView>
+                  <JFXButton fx:id="myButton1" focusTraversable="false" prefHeight="505.0" prefWidth="376.0" ripplerFill="WHITE" style="-fx-text-fill: transparent; -fx-background-color: transparent;" styleClass="ImageStructure" stylesheets="@Style.css" text="Image" />
+               </children>
+            </Group>
+            <Group layoutX="1335.0" layoutY="445.0">
+               <children>
+                  <ImageView fx:id="ImageView4" fitHeight="505.0" fitWidth="376.0" layoutX="1.0" pickOnBounds="true">
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                  </ImageView>
+                  <JFXButton fx:id="myButton4" focusTraversable="false" prefHeight="505.0" prefWidth="376.0" ripplerFill="WHITE" style="-fx-text-fill: transparent; -fx-background-color: transparent;" styleClass="ImageStructure" stylesheets="@Style.css" text="Image" />
+               </children>
+            </Group>
+            <Group layoutX="940.0" layoutY="445.0">
+               <children>
+                  <ImageView fx:id="ImageView3" fitHeight="505.0" fitWidth="376.0" layoutX="1.0" pickOnBounds="true">
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                  </ImageView>
+                  <JFXButton fx:id="myButton3" focusTraversable="false" prefHeight="505.0" prefWidth="376.0" ripplerFill="WHITE" style="-fx-text-fill: transparent; -fx-background-color: transparent;" styleClass="ImageStructure" stylesheets="@Style.css" text="Image" />
+               </children>
+            </Group>
+         </children>
+      </AnchorPane>
+      <ImageView fx:id="menu" fitHeight="104.0" fitWidth="104.0" layoutX="1738.0" layoutY="56.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/menuicon.png" />
+         </image>
+      </ImageView>
+      <AnchorPane id="menu" fx:id="pane2" layoutX="1383.0" prefHeight="1080.0" prefWidth="537.0" style="-fx-background-color: #000000;">
+         <children>
+            <JFXButton focusTraversable="false" layoutX="70.0" layoutY="465.0" onAction="#WatchedList" prefHeight="112.0" prefWidth="405.0" ripplerFill="#ffffff00" styleClass="Subscription" stylesheets="@Style.css" text="Watched List" textFill="WHITE">
+               <font>
+                  <Font name="Fredoka Bold" size="44.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="Later" focusTraversable="false" layoutX="73.0" layoutY="615.0" onAction="#Later" prefHeight="112.0" prefWidth="405.0" ripplerFill="#ffffff00" styleClass="Subscription" stylesheets="@Style.css" text="Later List" textFill="WHITE">
+               <font>
+                  <Font name="Fredoka Bold" size="44.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="Logout" focusTraversable="false" layoutX="75.0" layoutY="765.0" onAction="#Logout" prefHeight="112.0" prefWidth="405.0" ripplerFill="#ffffff00" style="-fx-text-fill: red;" styleClass="Subscription" stylesheets="@Style.css" text="Log out" textFill="WHITE">
+               <font>
+                  <Font name="Fredoka Bold" size="44.0" />
+               </font>
+            </JFXButton>
+            <ImageView fitHeight="313.0" fitWidth="313.0" layoutX="110.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Images/icons8-person-96.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="pane1" layoutX="-431.0" layoutY="874.0" prefHeight="1080.0" prefWidth="1392.0" style="-fx-background-color: #0d0d0d;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="528.0" AnchorPane.topAnchor="0.0" />
+   </children>
+</AnchorPane>

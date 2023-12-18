@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Bloom?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="645.0" prefWidth="1045.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.oopjavafx.LoginController">
+   <children>
+      <AnchorPane layoutX="469.0" layoutY="-1.0" prefHeight="647.0" prefWidth="579.0" style="-fx-background-color: #2d2d2d;">
+         <children>
+            <Label layoutX="75.0" layoutY="63.0" text="Sign in" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="36.0" />
+               </font>
+            </Label>
+            <Label layoutX="200.0" layoutY="68.0" text="now" textFill="#4dde90">
+               <font>
+                  <Font name="Arial Bold" size="36.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" focusTraversable="false" layoutX="246.0" layoutY="64.0" prefHeight="54.0" prefWidth="54.0" text="." textFill="WHITE">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+            <TextField id="emailField" fx:id="email" layoutX="87.0" layoutY="206.0" prefHeight="32.0" prefWidth="420.0" promptText="Email" style="-fx-background-color: transparent; -fx-border-color: transparent transparent white; -fx-border-width: 3px; -fx-padding: 0 0 5px -5px;" stylesheets="@Login.css">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </TextField>
+            <PasswordField id="passwordField" fx:id="password" layoutX="87.0" layoutY="306.0" prefHeight="32.0" prefWidth="420.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: transparent transparent white transparent; -fx-border-width: 3px; -fx-padding: 0 0 5px -5px;" stylesheets="@Login.css">
+               <font>
+                  <Font name="Arial" size="20.0" />
+               </font>
+            </PasswordField>
+            <CheckBox id="checkbox" layoutX="89.0" layoutY="398.0" mnemonicParsing="false" prefHeight="7.0" prefWidth="13.0" stylesheets="@Login.css" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="8.0" />
+               </font>
+            </CheckBox>
+            <Label alignment="CENTER" focusTraversable="false" layoutX="105.0" layoutY="379.0" prefHeight="54.0" prefWidth="105.0" text="Remember me" textFill="WHITE">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="126.0" layoutY="540.0" text="Don't have an account? " textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Button focusTraversable="false" layoutX="316.0" layoutY="538.0" mnemonicParsing="false" onAction="#ChangetoRegister" prefHeight="24.0" prefWidth="105.0" styleClass="changetologin" stylesheets="@Login.css" text="Sign up now" textFill="#4dde90">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <JFXButton id="button" layoutX="312.0" layoutY="408.0" onAction="#Login" prefHeight="77.0" prefWidth="202.0" ripplerFill="#4dde90" stylesheets="@Login.css" text="Sign in">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="645.0" prefWidth="442.0" style="-fx-background-color: rgb(0, 0, 0, 0.75); -fx-border-color: transparent #ffffff transparent transparent; -fx-border-style: solid; -fx-border-width: 2px;">
+         <children>
+            <Label alignment="CENTER" layoutX="1.0" layoutY="197.0" prefHeight="103.0" prefWidth="458.0" text="Furga" textFill="#4dde90">
+               <font>
+                  <Font name="Fredoka Bold" size="60.0" />
+               </font>
+               <effect>
+                  <Bloom threshold="0.77" />
+               </effect>
+            </Label>
+            <Label alignment="CENTER" layoutY="269.0" prefHeight="103.0" prefWidth="458.0" text="  All your favourite movies " textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="Arial" size="30.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="5.0" layoutY="321.0" prefHeight="71.0" prefWidth="458.0" text="in one place" textFill="#4dde90" wrapText="true">
+               <font>
+                  <Font name="Arial" size="30.0" />
+               </font>
+            </Label>
+            <Label layoutX="314.0" layoutY="335.0" prefHeight="46.0" prefWidth="17.0" text="." textFill="WHITE">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Label>
+            <Label fx:id="errorText" alignment="CENTER" layoutX="11.0" layoutY="483.0" prefHeight="62.0" prefWidth="447.0" textFill="RED">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

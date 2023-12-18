@@ -1,0 +1,72 @@
+.body {
+    -fx-background-color : rgb(0,0,0,0.9);
+}
+
+.labels {
+    -fx-text-fill : #4dde90;
+    -fx-font-size : 50px;
+    -fx-font-family : "fredoka";
+}
+
+#subscription {
+     -fx-background-radius : 30px;
+     -fx-background-color : #2d2d2d;
+     -fx-text-fill : white;
+     -fx-border-color : #4dde90;
+     -fx-border-radius : 30px;
+     -fx-border-style : solid;
+     -fx-border-width : 2px;
+     -fx-font-size : 32px;
+     -fx-font-family : "fredoka";
+}
+
+#subscription:hover {
+    -fx-text-fill : #4dde90;
+    -fx-border-color : transparent;
+    -fx-background-color : #2d2d2d;
+}
+
+.img {
+    -fx-background-color : #2d2d2d;
+}
+
+#Rating {
+    -fx-text-fill : #4dde90;
+    -fx-font-size : 58px;
+    -fx-font-family : "Fredoka";
+}
+
+.button1 {
+    -fx-font-size : 36px;
+    -fx-text-fill : black;
+    -fx-background-color : #4dde90;
+    -fx-background-radius : 50px;
+}
+
+.button1:hover {
+    -fx-text-fill : #4dde90;
+    -fx-background-color : #2d2d2d;
+}
+
+.button2:hover {
+    -fx-text-fill : #4dde90;
+    -fx-border-color : #2d2d2d  ;
+    -fx-background-color : #2d2d2d;
+}
+
+.button2 {
+    -fx-font-size : 36px;
+    -fx-text-fill : white;
+    -fx-background-color : #2d2d2d;
+    -fx-background-radius : 50px;
+    -fx-border-radius : 50px;
+    -fx-border-color : #4dde90;
+    -fx-border-style : solid;
+    -fx-border-width : 3px;
+}
+
+#RatingsPane {
+    -fx-background-color : #2d2d2d;
+    -fx-background-radius : 50px;
+}
+

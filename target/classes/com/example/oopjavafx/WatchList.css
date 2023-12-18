@@ -1,0 +1,76 @@
+.body {
+    -fx-background-color : rgb(0,0,0,0.9);
+}
+
+.search {
+    -fx-background-color : #2d2d2d;
+    -fx-background-radius : 30px;
+    -fx-border-color : transparent;
+    -fx-text-fill : #4dde90;
+}
+
+#subscription {
+     -fx-background-radius : 30px;
+     -fx-background-color : #2d2d2d;
+     -fx-text-fill : white;
+     -fx-border-color : #4dde90;
+     -fx-border-radius : 30px;
+     -fx-border-style : solid;
+     -fx-border-width : 2px;
+     -fx-font-size : 40px;
+     -fx-font-family : "fredoka";
+}
+
+#subscription:hover {
+    -fx-text-fill : #4dde90;
+    -fx-border-color : transparent;
+    -fx-background-color : #2d2d2d;
+}
+
+.nav {
+    -fx-background-color : white;
+}
+
+.movie-container {
+     -fx-background-radius : 30px;
+     -fx-border-radius : 30px;
+     -fx-background-color : #2d2d2d;
+}
+
+.labels {
+    -fx-text-fill : #4dde90;
+    -fx-font-size : 50px;
+    -fx-font-family : "fredoka";
+}
+
+.labels:hover {
+    -fx-text-fill : white;
+}
+
+#searchIcon {
+    -fx-text-fill : white;
+}
+
+.DefaultButton{
+       -fx-shape:"M 100 400 A 50 50 0 1 1 100 250 L 600 250 A 50 50 0 1 1 600 400 Z";
+      -fx-background-color:transparent;
+  }
+
+.Subscription{
+-fx-shape:"M 100 400 A 50 50 0 1 1 100 250 L 600 250 A 50 50 0 1 1 600 400 Z";
+-fx-background-color: #2E2E2E;
+-fx-font-size : 44px;
+-fx-font-family : "fredoka";
+-fx-text-fill : white;
+}
+
+.Search{
+-fx-shape:"M 50 400 A 50 50 0 1 1 50 300 L 750 300 A 50 50 0 1 1 750 400 Z";
+-fx-background-color: #2E2E2E;
+-fx-text-fill: #eeeeee
+}
+
+.ImageStructure{
+-fx-shape: "M 50 100 Q 50 50 100 50 L 650 50 Q 700 50 700 100 L 700 490 Q 700 550 650 550 L 100 550 Q 50 550 50 490 Z";
+-fx-background-color: #2E2E2E;
+}

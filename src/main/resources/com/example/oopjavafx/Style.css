@@ -1,0 +1,20 @@
+.DefaultButton{
+       -fx-shape:"M 100 400 A 50 50 0 1 1 100 250 L 600 250 A 50 50 0 1 1 600 400 Z";
+      -fx-background-color:transparent;
+  }
+
+.Subscription{
+-fx-shape:"M 100 400 A 50 50 0 1 1 100 250 L 600 250 A 50 50 0 1 1 600 400 Z";
+-fx-background-color: #2E2E2E;
+}
+
+.Search{
+-fx-shape:"M 50 400 A 50 50 0 1 1 50 300 L 750 300 A 50 50 0 1 1 750 400 Z";
+-fx-background-color: #2E2E2E;
+-fx-text-fill: #eeeeee
+}
+
+.ImageStructure{
+-fx-shape: "M 50 100 Q 50 50 100 50 L 650 50 Q 700 50 700 100 L 700 490 Q 700 550 650 550 L 100 550 Q 50 550 50 490 Z";
+-fx-background-color: #2E2E2E;
+}
